@@ -1,0 +1,6 @@
+{
+  "name": "Software Engineer Portfolio",
+  "description": "A premium, dark-themed interactive portfolio for a Full-Stack & Generative AI Software Engineer, featuring dynamic animations and responsive project exhibits.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
+
+  /* Custom palette matching mood spec */
+  --color-bg-primary: #050816;
+  --color-surface-card: #0f172a;
+  --color-primary-blue: #3b82f6;
+  --color-accent-purple: #8b5cf6;
+  --color-text-white: #ffffff;
+  --color-text-secondary: #94a3b8;
+}
+
+/* Base custom styles to reinforce typography */
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-white);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+pre, code, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom modern scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-card);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-blue);
+}
