@@ -2,9 +2,10 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Download, Mail, Layers, Server, Smartphone, BrainCircuit, Bot } from 'lucide-react';
 import { PERSONAL_INFO } from '../data';
+import avatarImg from '../assets/images/portfolio_pic.jpg';
 
 // Dynamic image path resolved from tool output
-const AVATAR_PATH = "/src/assets/images/portfolio_pic.jpg";
+const AVATAR_PATH = avatarImg;
 
 interface HeroProps {
   onOpenContact: () => void;
