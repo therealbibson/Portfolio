@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 .env.example
+<<<<<<< HEAD
+=======
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+>>>>>>> 240586e20782a518f72b9cb022cbc4ec7f0a8326
