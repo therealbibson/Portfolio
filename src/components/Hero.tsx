@@ -4,12 +4,6 @@ import { ArrowRight, Download, Mail, Github, Linkedin } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
 import { PERSONAL_INFO } from '../data';
 import avatarImg from '../assets/images/portfolio_pic.jpg';
-<<<<<<< HEAD
-=======
-
-// Dynamic image path resolved from tool output
-const AVATAR_PATH = avatarImg;
->>>>>>> 240586e20782a518f72b9cb022cbc4ec7f0a8326
 
 interface HeroProps {
   onOpenContact: () => void;
