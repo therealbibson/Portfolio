@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Mail, Github, Linkedin, Send, Terminal, Check, AlertCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Github, Linkedin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
 import emailjs from '@emailjs/browser';
+import { PERSONAL_INFO } from '../data';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,8 +12,8 @@ export default function Contact() {
     message: '',
   });
 
-  const [formStage, setFormStage] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (key: keyof typeof formData, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -23,297 +23,243 @@ export default function Contact() {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    setFormStage('sending');
-    setTerminalLogs(["INITIALIZING SECURE UPLINK..."]);
+    setStatus('sending');
+    setErrorMessage('');
 
     try {
-      const addLog = (msg: string) => setTerminalLogs(prev => [...prev, msg]);
-      
-      setTimeout(() => addLog("PACKETING PROMPT DATA..."), 400);
-      setTimeout(() => addLog("ESTABLISHING SMTP GATEWAY..."), 800);
+      const env = (import.meta as any).env || {};
+      const serviceId = env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = env.VITE_EMAILJS_PUBLIC_KEY;
 
-      const result = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
-        {
-          from_name: formData.name,
-          reply_to: formData.email,
-          subject: formData.subject || 'New Project Protocol',
-          message: formData.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
-      );
+      const hasValidEmailJs =
+        serviceId &&
+        templateId &&
+        publicKey &&
+        serviceId !== 'your_service_id' &&
+        templateId !== 'your_template_id' &&
+        publicKey !== 'your_public_key';
 
-      if (result.status === 200) {
-        addLog("ENCRYPTION HANDSHAKE OK.");
-        addLog("TRANSMISSION DELIVERED // REGISTRY COMPLETED!");
-        
-        setTimeout(() => {
-          setFormStage('success');
+      // 1. If user configured EmailJS credentials, send via EmailJS
+      if (hasValidEmailJs) {
+        const result = await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            from_name: formData.name,
+            reply_to: formData.email,
+            subject: formData.subject || 'Portfolio Message',
+            message: formData.message,
+          },
+          publicKey
+        );
+
+        if (result.status === 200) {
+          setStatus('success');
           setFormData({ name: '', email: '', subject: '', message: '' });
-        }, 1000);
-      } else {
-        throw new Error("STATION REJECTED PACKETS");
+          return;
+        }
       }
 
+      // 2. Direct serverless delivery straight to user's personal inbox (No setup required)
+      const response = await fetch(`https://formsubmit.co/ajax/${PERSONAL_INFO.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject || `New Portfolio Message from ${formData.name}`,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error(data.message || 'Delivery service unavailable');
+      }
     } catch (error) {
-      console.error('EmailJS Error:', error);
-      setTerminalLogs(prev => [...prev, "CRITICAL ERROR: UPLINK FAILED", "STATION STATUS: OFFLINE"]);
-      setTimeout(() => setFormStage('error'), 1000);
+      console.error('Contact submit error:', error);
+      setStatus('error');
+      setErrorMessage(`Could not deliver automatically. You can email me directly at ${PERSONAL_INFO.email}.`);
     }
   };
 
   return (
     <section
       id="contact"
-      className="relative py-24 max-w-7xl mx-auto px-6 overflow-hidden border-t border-slate-900/60"
+      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-900/80"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full">
-        {/* Left Column: Details & Social Links */}
-        <div className="lg:col-span-5 flex flex-col items-start text-left gap-6 justify-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-slate-800">
-            <span className="text-[10px] sm:text-xs font-mono font-medium tracking-wider text-primary-blue">
-              08 // CONNECTIVITY
-            </span>
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 text-left">
+        {/* Left Column: Direct info */}
+        <div className="lg:col-span-5 flex flex-col items-start gap-5">
+          <span className="text-xs font-mono font-medium tracking-wider text-primary-blue uppercase">
+            Get In Touch
+          </span>
 
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-text-white tracking-tight leading-tight">
-            Initiate Project
-            <br />
-            <span className="text-primary-blue font-extrabold">
-              Scaffolding Brief
-            </span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-text-white tracking-tight">
+            Let's Work Together
           </h2>
 
-          <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-md">
-            Interested in launching a scalable web platform, designing premium prompt validation systems, or contracting remote engineering services? Dispatch an transmission.
+          <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Have a project in mind, want to discuss an open role, or just want to say hi? Feel free to reach out via email or send a message using the form.
           </p>
 
-          <div className="flex flex-col gap-4 w-full max-w-sm pt-4 border-t border-slate-800">
-            {/* Email card */}
+          <div className="w-full space-y-3 pt-3 border-t border-slate-800">
+            {/* Direct Email Link */}
             <a
-              id="contact-gateway-email"
-              href="mailto:uabeeb3@gmail.com"
-              className="flex items-center gap-4 p-4 rounded-xl bg-bg-primary border border-slate-800 hover:border-primary-blue/30 hover:bg-surface-card/40 transition-all duration-300 group"
+              href={`mailto:${PERSONAL_INFO.email}`}
+              className="flex items-center gap-3 p-3.5 rounded-lg bg-surface-card border border-slate-800 hover:border-primary-blue/40 transition-colors"
             >
-              <div className="w-10 h-10 rounded-lg bg-primary-blue/10 border border-primary-blue/40 flex items-center justify-center text-primary-blue font-bold group-hover:scale-105 transition-all">
+              <div className="w-9 h-9 rounded-md bg-primary-blue/10 flex items-center justify-center text-primary-blue">
                 <Mail size={16} />
               </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-mono text-text-secondary">EMAIL TRANSMISSION</span>
-                <span className="text-sm font-semibold text-text-white">uabeeb3@gmail.com</span>
+              <div>
+                <span className="text-[11px] font-mono text-slate-400 block">Direct Email</span>
+                <span className="text-sm font-semibold text-text-white">{PERSONAL_INFO.email}</span>
               </div>
             </a>
+          </div>
 
-            {/* LinkedIn card */}
-            <a
-              id="contact-gateway-linkedin"
-              href="https://linkedin.com/in/usman-abeeb-9a998a279"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-4 rounded-xl bg-bg-primary border border-slate-800 hover:border-accent-purple/30 hover:bg-surface-card/40 transition-all duration-300 group"
-            >
-              <div className="w-10 h-10 rounded-lg bg-accent-purple/10 border border-accent-purple/40 flex items-center justify-center text-accent-purple font-bold group-hover:scale-105 transition-all">
-                <Linkedin size={16} />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-mono text-text-secondary">PROFESSIONAL NETWORK</span>
-                <span className="text-sm font-semibold text-text-white">linkedin.com/in/usman-abeeb</span>
-              </div>
-            </a>
-
-            {/* X card */}
-            <a
-              id="contact-gateway-x"
-              href="https://x.com/theRealBibson"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-4 rounded-xl bg-bg-primary border border-slate-800 hover:border-text-white/30 hover:bg-surface-card/40 transition-all duration-300 group"
-            >
-              <div className="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-text-white font-bold group-hover:scale-105 transition-all">
-                <FaXTwitter size={16} />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-mono text-text-secondary">SOCIAL PLATFORM</span>
-                <span className="text-sm font-semibold text-text-white">x.com/theRealBibson</span>
-              </div>
-            </a>
+          {/* Social Profiles */}
+          <div className="pt-2">
+            <span className="text-xs font-mono text-slate-400 block mb-3">Connect on Social</span>
+            <div className="flex items-center gap-3">
+              <a
+                href={PERSONAL_INFO.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-lg bg-surface-card border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+                title="GitHub"
+              >
+                <Github size={17} />
+              </a>
+              <a
+                href={PERSONAL_INFO.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-lg bg-surface-card border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+                title="LinkedIn"
+              >
+                <Linkedin size={17} />
+              </a>
+              <a
+                href={PERSONAL_INFO.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-lg bg-surface-card border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+                title="X (Twitter)"
+              >
+                <FaXTwitter size={17} />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Right Column: Interactive Form panel */}
-        <div className="lg:col-span-7" id="contact-form-stage">
-          <div className="p-6 sm:p-8 rounded-2xl bg-surface-card border border-slate-800 backdrop-blur-md shadow-xl">
-            <AnimatePresence mode="wait">
-              {formStage === 'idle' && (
-                <motion.form
-                  key="contact-form"
-                  onSubmit={handleFormSubmit}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col gap-5 text-left"
+        {/* Right Column: Clean Working Form */}
+        <div className="lg:col-span-7 bg-surface-card border border-slate-800 p-6 sm:p-8 rounded-xl shadow-lg">
+          <h3 className="font-display font-semibold text-lg text-text-white mb-2">
+            Send a Message
+          </h3>
+          <p className="text-xs text-slate-400 mb-6">
+            Fill out the form below to deliver a message straight to my inbox.
+          </p>
+
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Your Name <span className="text-primary-blue">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
+                  placeholder="e.g. John Doe"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-bg-primary border border-slate-800 focus:border-primary-blue focus:outline-none text-xs text-text-white transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Your Email <span className="text-primary-blue">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  placeholder="john@example.com"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-bg-primary border border-slate-800 focus:border-primary-blue focus:outline-none text-xs text-text-white transition-colors"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Subject
+              </label>
+              <input
+                type="text"
+                value={formData.subject}
+                onChange={(e) => handleInputChange('subject', e.target.value)}
+                placeholder="Project inquiry / Opportunity"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-bg-primary border border-slate-800 focus:border-primary-blue focus:outline-none text-xs text-text-white transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Message <span className="text-primary-blue">*</span>
+              </label>
+              <textarea
+                required
+                rows={5}
+                value={formData.message}
+                onChange={(e) => handleInputChange('message', e.target.value)}
+                placeholder="Tell me about your project, timeline, or idea..."
+                className="w-full px-3.5 py-2.5 rounded-lg bg-bg-primary border border-slate-800 focus:border-primary-blue focus:outline-none text-xs text-text-white transition-colors resize-none"
+              />
+            </div>
+
+            {/* Status alerts */}
+            {status === 'success' && (
+              <div className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center gap-2">
+                <CheckCircle2 size={16} className="flex-shrink-0" />
+                <span>Thank you! Your message has been sent successfully. I will get back to you soon.</span>
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="p-3.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <AlertCircle size={16} className="text-rose-400 flex-shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+                <a
+                  href={`mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`}
+                  className="px-3 py-1 rounded bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 font-semibold text-[11px] transition-colors whitespace-nowrap self-end sm:self-auto"
                 >
-                  <span className="text-xs font-mono font-bold text-text-secondary uppercase tracking-widest block mb-1">
-                    TRANSMISSION DISPATCH BOARD
-                  </span>
+                  Send via Email App &rarr;
+                </a>
+              </div>
+            )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-[10px] font-mono font-semibold text-text-secondary uppercase tracking-wider">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Marcus Vance"
-                        value={formData.name}
-                        onChange={(e) => handleInputChange('name', e.target.value)}
-                        className="bg-bg-primary border border-slate-800 focus:border-primary-blue/40 rounded-lg p-3 text-xs sm:text-sm text-text-white font-sans focus:outline-none focus:ring-1 focus:ring-primary-blue/10 placeholder-slate-700 transition-all duration-200"
-                      />
-                    </div>
-
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-[10px] font-mono font-semibold text-text-secondary uppercase tracking-wider">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="e.g. marcus@neural.io"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        className="bg-bg-primary border border-slate-800 focus:border-primary-blue/40 rounded-lg p-3 text-xs sm:text-sm text-text-white font-sans focus:outline-none focus:ring-1 focus:ring-primary-blue/10 placeholder-slate-700 transition-all duration-200"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-mono font-semibold text-text-secondary uppercase tracking-wider">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Next-Generation RAG Scaffolding Contract"
-                      value={formData.subject}
-                      onChange={(e) => handleInputChange('subject', e.target.value)}
-                      className="bg-bg-primary border border-slate-800 focus:border-primary-blue/40 rounded-lg p-3 text-xs sm:text-sm text-text-white font-sans focus:outline-none focus:ring-1 focus:ring-primary-blue/10 placeholder-slate-700 transition-all duration-200"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-mono font-semibold text-text-secondary uppercase tracking-wider">
-                      Requirements Description *
-                    </label>
-                    <textarea
-                      required
-                      rows={5}
-                      placeholder="Specify deliverables scope, stack, timeline expectations..."
-                      value={formData.message}
-                      onChange={(e) => handleInputChange('message', e.target.value)}
-                      className="bg-bg-primary border border-slate-800 focus:border-primary-blue/40 rounded-lg p-3 text-xs sm:text-sm text-text-white font-sans focus:outline-none focus:ring-1 focus:ring-primary-blue/10 placeholder-slate-700 transition-all duration-200 resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full sm:w-auto self-start mt-2 px-6 py-3.5 rounded-xl bg-primary-blue hover:opacity-90 text-text-white text-xs sm:text-sm font-bold shadow-md hover:scale-[1.01] transition-all flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <Send size={14} /> Send Project Scaffolding Brief
-                  </button>
-                </motion.form>
-              )}
-
-              {formStage === 'sending' && (
-                <motion.div
-                  key="sending-state"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col gap-6 py-12 items-center text-center justify-center"
-                >
-                  <Terminal size={40} className="text-accent-purple animate-spin" />
-                  <div className="flex flex-col gap-2">
-                    <h3 className="font-mono text-sm font-bold text-text-white uppercase tracking-wider">
-                      Securing API Dispatch Packets
-                    </h3>
-                    <p className="text-xs text-text-secondary font-sans">
-                      Pushing details through secure web transport hooks...
-                    </p>
-                  </div>
-
-                  <div className="w-full max-w-md p-4 rounded-xl bg-bg-primary border border-slate-800 text-left font-mono text-[10px] overflow-hidden flex flex-col gap-1.5 text-text-secondary">
-                    {terminalLogs.map((log, lIdx) => (
-                      <div key={lIdx} className="flex gap-2">
-                        <span className="text-accent-purple">&gt;&gt;</span>
-                        <span>{log}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {formStage === 'success' && (
-                <motion.div
-                  key="success-state"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col gap-6 py-12 items-center text-center justify-center"
-                >
-                  <div className="w-16 h-16 rounded-full bg-emerald-950/50 border border-emerald-500/50 flex items-center justify-center text-emerald-400 animate-bounce">
-                    <Check size={28} />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <h3 className="font-display text-xl font-bold text-text-white">
-                      Transmission Processed!
-                    </h3>
-                    <p className="text-xs sm:text-sm text-text-secondary max-w-md font-sans">
-                      Your proposal metadata has compiled successfully. Abeeb will decode this brief, inspect the milestones scope, and reply via secure channel within 24 hours.
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={() => setFormStage('idle')}
-                    className="px-5 py-2.5 rounded-lg bg-bg-primary border border-slate-800 text-text-secondary hover:text-text-white text-xs font-semibold hover:border-slate-700 transition-all cursor-pointer"
-                  >
-                    Build Another Proposal
-                  </button>
-                </motion.div>
-              )}
-
-              {formStage === 'error' && (
-                <motion.div
-                  key="error-state"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col gap-6 py-12 items-center text-center justify-center"
-                >
-                  <div className="w-16 h-16 rounded-full bg-red-950/50 border border-red-500/50 flex items-center justify-center text-red-400">
-                    <AlertCircle size={28} />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <h3 className="font-display text-xl font-bold text-text-white">
-                      Transmission Failed
-                    </h3>
-                    <p className="text-xs sm:text-sm text-text-secondary max-w-md font-sans">
-                      The secure channel could not be established. Please verify your connection or reach out directly via email.
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={() => setFormStage('idle')}
-                    className="px-5 py-2.5 rounded-lg bg-bg-primary border border-slate-800 text-text-secondary hover:text-text-white text-xs font-semibold hover:border-slate-700 transition-all cursor-pointer"
-                  >
-                    Re-attempt Transmission
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-primary-blue hover:bg-blue-600 disabled:opacity-50 text-xs font-semibold text-white flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <Send size={14} />
+              {status === 'sending' ? 'Sending Message...' : 'Send Message'}
+            </button>
+          </form>
         </div>
       </div>
     </section>

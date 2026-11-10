@@ -1,5 +1,5 @@
-import { X, Printer, Download, MapPin, Briefcase, Mail, Globe, Award } from 'lucide-react';
-import { PERSONAL_INFO, TIMELINE, SKILL_CATEGORIES } from '../data';
+import { X, Printer, Mail, MapPin, Github, Linkedin } from 'lucide-react';
+import { PERSONAL_INFO, TIMELINE, SKILL_CATEGORIES, PROJECTS } from '../data';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -16,164 +16,172 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   return (
     <div
       id="resume-modal-overlay"
-      className="fixed inset-0 z-55 flex items-center justify-center p-4 bg-bg-primary/90 backdrop-blur-md overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white print:static"
       onClick={onClose}
     >
       <div
         id="resume-modal-container"
-        className="relative w-full max-w-4xl bg-surface-card text-text-white rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8 print:my-0 print:rounded-none print:shadow-none"
+        className="relative w-full max-w-3xl bg-surface-card text-text-white rounded-xl shadow-2xl overflow-hidden flex flex-col my-auto border border-slate-800 print:my-0 print:border-none print:shadow-none print:bg-white print:text-neutral-900 print:rounded-none"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Dynamic header control bar for web view */}
-        <div className="flex items-center justify-between px-6 py-4 bg-surface-card border-b border-slate-800 text-text-white print:hidden">
-          <div className="flex items-center gap-2">
-            <Award size={18} className="text-accent-purple animate-pulse" />
-            <span className="font-display font-bold text-sm tracking-tight">Interactive Resume Matrix</span>
-          </div>
+        {/* Modal Top Bar (Web view only, hidden when printing) */}
+        <div className="flex items-center justify-between px-5 py-3 bg-slate-900 border-b border-slate-800 text-text-white print:hidden">
+          <span className="font-display font-semibold text-xs sm:text-sm">
+            Resume — {PERSONAL_INFO.name} (Single-Page Format)
+          </span>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
-              id="print-resume-btn"
               onClick={handlePrint}
-              className="px-3.5 py-1.5 rounded-lg bg-bg-primary border border-slate-800 hover:border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="px-3.5 py-1.5 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+              title="Save as 1-Page PDF or Print"
             >
-              <Printer size={13} /> Print / Export (PDF)
+              <Printer size={13} />
+              <span>Print / Save PDF</span>
             </button>
             <button
-              id="close-resume-btn"
               onClick={onClose}
-              className="p-1.5 rounded-full bg-bg-primary border border-slate-800 text-text-secondary hover:text-text-white cursor-pointer"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 cursor-pointer transition-colors"
+              aria-label="Close"
             >
-              <X size={15} />
+              <X size={16} />
             </button>
           </div>
         </div>
 
-        {/* Printable Resume Canvas */}
-        <div className="p-8 sm:p-12 overflow-y-auto max-h-[80vh] print:max-h-none print:overflow-visible flex flex-col gap-8 bg-surface-card select-text text-left">
+        {/* 1-Page Compact Document Canvas */}
+        <div className="p-5 sm:p-7 overflow-y-auto max-h-[85vh] print:max-h-none print:overflow-visible flex flex-col gap-2.5 text-left text-xs sm:text-[12px] leading-tight font-sans print:p-0 print:text-[8.5pt] print:leading-snug">
           
-          {/* Header block */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 border-b border-slate-800 pb-6">
-            <div className="flex flex-col gap-1">
-              <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-text-white tracking-tight leading-none uppercase">
-                {PERSONAL_INFO.name}
-              </h1>
-              <span className="font-display font-bold text-sm tracking-wide text-accent-purple block uppercase mt-1">
-                {PERSONAL_INFO.title}
-              </span>
-              <p className="text-xs sm:text-sm text-text-secondary font-sans max-w-md leading-relaxed mt-2">
-                {PERSONAL_INFO.bio}
-              </p>
+          {/* Header Block */}
+          <div className="border-b border-slate-800 print:border-slate-300 pb-2 resume-section">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h1 className="font-display font-bold text-xl sm:text-2xl text-text-white tracking-tight">
+                  {PERSONAL_INFO.name}
+                </h1>
+                <p className="font-medium text-xs text-primary-blue resume-sub-title">
+                  {PERSONAL_INFO.title}
+                </p>
+              </div>
+
+              {/* Contact Links */}
+              <div className="flex flex-wrap sm:justify-end gap-x-3 gap-y-0.5 text-[10.5px] sm:text-[11px] text-slate-300 print:text-neutral-700 font-mono pt-1 sm:pt-0">
+                <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-1 hover:underline">
+                  <Mail size={11} className="text-primary-blue" />
+                  <span>{PERSONAL_INFO.email}</span>
+                </a>
+                <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline">
+                  <Github size={11} className="text-primary-blue" />
+                  <span>github.com/therealbibson</span>
+                </a>
+                <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline">
+                  <Linkedin size={11} className="text-primary-blue" />
+                  <span>LinkedIn</span>
+                </a>
+                <span className="flex items-center gap-1">
+                  <MapPin size={11} className="text-primary-blue" />
+                  <span>Lagos, Nigeria (Remote)</span>
+                </span>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-1.5 text-xs text-text-secondary font-sans sm:text-right">
-              <span className="flex items-center sm:justify-end gap-1.5">
-                <Mail size={12} className="text-accent-purple" /> uabeeb3@gmail.com
-              </span>
-              <span className="flex items-center sm:justify-end gap-1.5">
-                <Globe size={12} className="text-accent-purple" /> alexsterling-dev.io
-              </span>
-              <span className="flex items-center sm:justify-end gap-1.5">
-                <MapPin size={12} className="text-accent-purple" /> London, UK / Remote focus
-              </span>
-              <span className="flex items-center sm:justify-end gap-1.5 font-mono text-[10px] text-zinc-400 mt-1 uppercase">
-                STATION ID: #7915-B3
-              </span>
+            {/* Brief Professional Summary */}
+            <p className="mt-1.5 text-slate-300 print:text-neutral-700 text-[11px] sm:text-xs leading-relaxed">
+              Full-Stack Developer with 3+ years of experience building responsive web frontends, scalable REST APIs, and cross-platform mobile apps. Proficient in TypeScript, React, Next.js, Node.js, and React Native with practical experience integrating LLM APIs into production applications.
+            </p>
+          </div>
+
+          {/* Technical Skills */}
+          <div className="space-y-1 resume-section">
+            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-800 pb-0.5">
+              Technical Skills
+            </h2>
+            <div className="space-y-0.5 text-[10.5px] sm:text-[11.5px]">
+              <div>
+                <span className="font-semibold text-text-white resume-role-title">Languages & Frontend: </span>
+                <span className="text-slate-300 print:text-neutral-700">TypeScript, JavaScript, React, Next.js, Tailwind CSS, HTML5/CSS3, Zustand, Redux.</span>
+              </div>
+              <div>
+                <span className="font-semibold text-text-white resume-role-title">Backend & Cloud: </span>
+                <span className="text-slate-300 print:text-neutral-700">Node.js, Express.js, PostgreSQL, MongoDB, RESTful APIs, Redis, Docker.</span>
+              </div>
+              <div>
+                <span className="font-semibold text-text-white resume-role-title">Mobile & Tools: </span>
+                <span className="text-slate-300 print:text-neutral-700">React Native, Expo, SQLite, Git, Linux, LLM APIs (Gemini, Claude, OpenAI).</span>
+              </div>
             </div>
           </div>
 
-          {/* Staggered double column grids */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            
-            {/* Left side: Skills and Core credentials (md:col-span-4) */}
-            <div className="md:col-span-4 flex flex-col gap-6">
-              
-              <div className="flex flex-col gap-3">
-                <h3 className="font-display font-bold text-xs text-text-secondary tracking-wider uppercase border-b border-slate-800 pb-2">
-                  Technical Core Matrix
-                </h3>
-                {SKILL_CATEGORIES.map((cat) => (
-                  <div key={cat.title} className="flex flex-col gap-1.5">
-                    <span className="text-[11px] font-display font-bold text-text-white">{cat.title}</span>
-                    <div className="flex flex-wrap gap-1">
-                      {cat.items.map((skill) => (
-                        <span key={skill.name} className="text-[9px] font-mono font-semibold bg-bg-primary text-text-secondary px-1.5 py-0.5 rounded border border-slate-800">
-                          {skill.name} ({skill.percent}%)
-                        </span>
-                      ))}
-                    </div>
+          {/* Work Experience */}
+          <div className="space-y-1.5 resume-section">
+            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-800 pb-0.5">
+              Work Experience
+            </h2>
+
+            {/* Role 1 */}
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-baseline">
+                <span className="font-semibold text-text-white resume-role-title">
+                  Full-Stack Software Engineer <span className="font-normal text-slate-400 print:text-neutral-600">— Tech Solutions & Engineering</span>
+                </span>
+                <span className="font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600">2024 – Present</span>
+              </div>
+              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+                <li>Architected full-stack web applications using React, TypeScript, and Node.js with PostgreSQL persistence.</li>
+                <li>Designed secure RESTful APIs with JWT authentication, Redis caching, and integrated Gemini LLM workflows for automated data parsing.</li>
+              </ul>
+            </div>
+
+            {/* Role 2 */}
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-baseline">
+                <span className="font-semibold text-text-white resume-role-title">
+                  Full-Stack & Mobile Developer <span className="font-normal text-slate-400 print:text-neutral-600">— Freelance & Startups</span>
+                </span>
+                <span className="font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600">2022 – 2024</span>
+              </div>
+              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+                <li>Built cross-platform iOS and Android mobile apps using React Native and Expo with offline-first SQLite synchronization.</li>
+                <li>Engineered responsive client dashboards and integrated third-party payment and messaging APIs.</li>
+              </ul>
+            </div>
+
+            {/* Role 3 */}
+            <div className="space-y-0.5">
+              <div className="flex justify-between items-baseline">
+                <span className="font-semibold text-text-white resume-role-title">
+                  Frontend Developer <span className="font-normal text-slate-400 print:text-neutral-600">— Digital Interface Studio</span>
+                </span>
+                <span className="font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600">2021 – 2022</span>
+              </div>
+              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+                <li>Developed modular, accessible UI components and optimized Core Web Vitals to deliver sub-second page loads.</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* All 5 Projects Section */}
+          <div className="space-y-1 resume-section">
+            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-800 pb-0.5">
+              Featured Projects ({PROJECTS.length})
+            </h2>
+
+            <div className="space-y-1 text-[10.5px] sm:text-[11px]">
+              {PROJECTS.map((project) => (
+                <div key={project.id} className="space-y-0.5">
+                  <div className="flex justify-between items-baseline">
+                    <span className="font-semibold text-text-white resume-role-title">
+                      {project.title} <span className="font-mono font-normal text-[9.5px] text-slate-400 print:text-neutral-600">| {project.techStack.join(', ')}</span>
+                    </span>
                   </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <h3 className="font-display font-bold text-xs text-text-secondary tracking-wider uppercase border-b border-slate-800 pb-2">
-                  Operating Competences
-                </h3>
-                <ul className="space-y-1.5 text-xs text-text-secondary font-sans">
-                  <li>• System-level prompt injections testing</li>
-                  <li>• Thread parallelization & cluster loads</li>
-                  <li>• Semantic JSON validations via schemas</li>
-                  <li>• Zero-compromise web layout accessibility</li>
-                </ul>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <h3 className="font-display font-bold text-xs text-text-secondary tracking-wider uppercase border-b border-slate-800 pb-2">
-                  Certifications Gate
-                </h3>
-                <div className="flex flex-col gap-1">
-                  <span className="text-[11px] font-bold text-text-white">Advanced AI Agent Specialist</span>
-                  <span className="text-[10px] text-text-secondary">Alliance of Cognitive Computing (2023)</span>
+                  <p className="text-slate-300 print:text-neutral-700">
+                    {project.description}
+                  </p>
                 </div>
-              </div>
-
+              ))}
             </div>
-
-            {/* Right side: Experiences ledger (md:col-span-8) */}
-            <div className="md:col-span-8 flex flex-col gap-6 border-l border-slate-800 pl-0 md:pl-6">
-              <h3 className="font-display font-bold text-xs text-text-secondary tracking-wider uppercase border-b border-slate-800 pb-2">
-                Professional Engineering Ledg
-              </h3>
-
-              <div className="flex flex-col gap-6">
-                {TIMELINE.filter(item => item.type !== 'certification').map((job) => (
-                  <div key={job.id} className="flex flex-col gap-1.5">
-                    <div className="flex justify-between items-start gap-2 flex-wrap">
-                      <div className="flex flex-col">
-                        <h4 className="font-display font-bold text-sm text-text-white">{job.title}</h4>
-                        <span className="text-xs text-accent-purple font-semibold">{job.organization}</span>
-                      </div>
-                      <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-bg-primary border border-slate-800 text-text-secondary uppercase tracking-tight">
-                        {job.period}
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-text-secondary font-sans leading-relaxed">
-                      {job.description}
-                    </p>
-
-                    {job.tech && (
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {job.tech.map(t => (
-                          <span key={t} className="text-[9px] font-mono text-text-secondary bg-bg-primary border border-slate-800 px-1.5 py-0.5 rounded">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-            </div>
-
           </div>
 
-          {/* Footer of printable document */}
-          <div className="border-t border-slate-800 pt-6 text-center text-[10px] text-text-secondary font-sans uppercase tracking-wider block print:hidden">
-            Document generated at London HQ • Print is beautifully fitted for standard A4 layout.
-          </div>
         </div>
       </div>
     </div>

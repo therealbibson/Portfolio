@@ -1,11 +1,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Download, Mail, Layers, Server, Smartphone, BrainCircuit, Bot } from 'lucide-react';
+import { ArrowRight, Download, Mail, Github, Linkedin } from 'lucide-react';
+import { FaXTwitter } from 'react-icons/fa6';
 import { PERSONAL_INFO } from '../data';
 import avatarImg from '../assets/images/portfolio_pic.jpg';
-
-// Dynamic image path resolved from tool output
-const AVATAR_PATH = avatarImg;
 
 interface HeroProps {
   onOpenContact: () => void;
@@ -18,18 +16,18 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -41,168 +39,194 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
     }
   };
 
+  // Shared Avatar Element with smooth floating and glow animations
+  const renderAvatar = (isMobile = false) => (
+    <div className="relative group">
+      {/* Ambient breathing aura behind the avatar */}
+      <motion.div
+        animate={{
+          scale: [1, 1.06, 1],
+          opacity: [0.35, 0.6, 0.35],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="absolute -inset-1.5 bg-gradient-to-tr from-primary-blue via-indigo-500 to-accent-purple rounded-3xl blur-lg -z-10"
+      />
+
+      {/* Floating card wrapper */}
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        whileHover={{ scale: 1.02 }}
+        className={`relative ${
+          isMobile
+            ? 'w-44 h-44 sm:w-56 sm:h-56'
+            : 'w-[300px] h-[300px] xl:w-[340px] xl:h-[340px]'
+        } rounded-2xl overflow-hidden p-1 bg-gradient-to-tr from-slate-800 via-slate-700 to-primary-blue/40 shadow-2xl transition-all duration-300`}
+      >
+        <div className="w-full h-full bg-surface-card rounded-xl overflow-hidden relative">
+          <img
+            src={avatarImg}
+            alt={PERSONAL_INFO.name}
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+          />
+        </div>
+      </motion.div>
+    </div>
+  );
+
   return (
     <section
       id="overview"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden max-w-7xl mx-auto px-6"
+      className="relative min-h-[90vh] flex items-center justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 max-w-6xl mx-auto px-4 sm:px-6"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center">
-        {/* Left Typography Container */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 w-full items-center">
+        {/* Left Column (Main Intro on Desktop, Full Flow on Mobile) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-7 flex flex-col items-start gap-6 text-left"
+          className="lg:col-span-7 flex flex-col items-start gap-5 sm:gap-6 text-left"
         >
-          {/* Tag Capsule */}
+          {/* Status Badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-slate-800 backdrop-blur-md shadow-lg"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-slate-800 text-[11px] sm:text-xs font-mono text-text-secondary"
           >
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] sm:text-xs font-mono font-medium tracking-wider text-text-secondary">
-              AVAILABLE FOR ELITE Freelancing & CONTRACTS
-            </span>
+            <span>Available for new projects & opportunities</span>
           </motion.div>
 
-          {/* Large Headline */}
+          {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="font-display font-bold text-4xl sm:text-5xl xl:text-6xl text-text-white tracking-tight leading-tight"
+            className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-text-white tracking-tight leading-[1.15]"
           >
-            Building Scalable
+            Hi, I'm <span className="text-primary-blue">{PERSONAL_INFO.name}</span>.
             <br />
-            Digital Experiences with
-            <br />
-            <span className="text-primary-blue font-extrabold shadow-sm">
-              Code & AI Precision
+            <span className="text-2xl sm:text-4xl lg:text-5xl text-slate-300 font-semibold">
+              Full-Stack Developer & Software Engineer
             </span>
           </motion.h1>
 
-          {/* Subheading: Multi-role pills */}
+          {/* Role Pills */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-2 sm:gap-3 py-1 font-mono text-xs sm:text-sm text-text-secondary"
+            className="flex flex-wrap gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-medium text-text-secondary"
           >
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-primary-blue/20 text-primary-blue">
-              <Layers size={13} /> Frontend
-            </span>
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-primary-blue/20 text-primary-blue">
-              <Server size={13} /> Backend
-            </span>
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-accent-purple/20 text-accent-purple">
-              <Smartphone size={13} /> Mobile
-            </span>
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-accent-purple/20 text-accent-purple">
-              <Bot size={13} /> Generative AI
-            </span>
+            {PERSONAL_INFO.roles.map((role) => (
+              <span
+                key={role}
+                className="px-2.5 py-1 rounded-md bg-surface-card border border-slate-800 text-slate-300"
+              >
+                {role}
+              </span>
+            ))}
           </motion.div>
 
-          {/* Description */}
+          {/* Mobile-Only Animated Avatar (In-between Roles and Bio) */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:hidden w-full flex justify-center py-2 sm:py-3"
+          >
+            {renderAvatar(true)}
+          </motion.div>
+
+          {/* Bio Description */}
           <motion.p
             variants={itemVariants}
             className="text-sm sm:text-base text-text-secondary font-sans max-w-xl leading-relaxed"
           >
-            I am <strong className="text-text-white">{PERSONAL_INFO.name}</strong>, a robust software engineer delivering fast React interfaces, secure Express API backends, highly interactive mobile application caches, and custom multi-agentic prompts structured for high production alignment.
+            {PERSONAL_INFO.bio}
           </motion.p>
 
           {/* Action CTAs */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto pt-1"
           >
-            {/* View Projects */}
             <button
               id="hero-view-projects"
               onClick={(e) => handleNavClick(e, '#projects')}
-              className="px-6 py-3.5 rounded-lg text-sm font-semibold text-text-white bg-primary-blue hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 border border-blue-400/20 hover:scale-[1.02] cursor-pointer shadow-md"
+              className="px-6 py-3 rounded-lg text-sm font-semibold text-text-white bg-primary-blue hover:bg-blue-600 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-blue-500/20"
             >
               View Projects
               <ArrowRight size={16} />
             </button>
 
-            {/* Resume and Hire */}
-            <div className="flex gap-3 w-full sm:w-auto">
+            <div className="grid grid-cols-2 sm:flex gap-3">
               <button
                 id="hero-download-resume"
                 onClick={onOpenResume}
-                className="flex-1 sm:flex-none px-5 py-3.5 rounded-lg text-sm font-semibold text-text-secondary hover:text-text-white bg-surface-card hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.01] cursor-pointer"
+                className="px-5 py-3 rounded-lg text-sm font-semibold text-slate-200 hover:text-text-white bg-surface-card hover:bg-slate-800 border border-slate-800 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download size={16} />
                 Resume
               </button>
 
               <button
-                id="hero-hire-me"
+                id="hero-contact-me"
                 onClick={onOpenContact}
-                className="flex-1 sm:flex-none px-5 py-3.5 rounded-lg text-sm font-semibold text-text-secondary hover:text-text-white bg-surface-card hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.01] cursor-pointer"
+                className="px-5 py-3 rounded-lg text-sm font-semibold text-slate-200 hover:text-text-white bg-surface-card hover:bg-slate-800 border border-slate-800 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Mail size={16} />
-                Hire Me
+                Contact
               </button>
             </div>
           </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-4 pt-2 text-text-secondary text-sm"
+          >
+            <span className="text-xs font-mono text-slate-500">Find me on:</span>
+            <a
+              href={PERSONAL_INFO.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded hover:bg-slate-800 hover:text-primary-blue transition-colors"
+              title="GitHub"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href={PERSONAL_INFO.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded hover:bg-slate-800 hover:text-primary-blue transition-colors"
+              title="LinkedIn"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href={PERSONAL_INFO.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded hover:bg-slate-800 hover:text-primary-blue transition-colors"
+              title="X (Twitter)"
+            >
+              <FaXTwitter size={17} />
+            </a>
+          </motion.div>
         </motion.div>
 
-        {/* Right Interactive Tech Ornament */}
-        <div className="lg:col-span-5 flex items-center justify-center relative py-12 lg:py-0">
-          {/* Infinite Orbital Ring */}
-          <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] rounded-full border border-blue-500/10 -z-10 rotate-12 scale-x-125" />
-          <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] rounded-full border border-purple-500/10 -z-10 -rotate-12 scale-y-125" />
-
-          {/* Avatar Perspective Container */}
+        {/* Desktop-Only Avatar Container with Animation */}
+        <div className="hidden lg:flex lg:col-span-5 items-center justify-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotateY: 25 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ type: 'spring', stiffness: 50, damping: 20, delay: 0.3 }}
-            className="relative w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] rounded-2xl overflow-hidden p-[1px] bg-slate-800 shadow-2xl group"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <div className="w-full h-full bg-surface-card rounded-2xl overflow-hidden relative">
-              {/* Main Avatar Image */}
-              <img
-                src={AVATAR_PATH}
-                alt={PERSONAL_INFO.name}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none grayscale-[15%] group-hover:grayscale-0"
-              />
-
-              {/* Diagonal Neon Light Sweeps - REMOVED */}
-
-              {/* Floating Hologram Overlays */}
-              <div className="absolute top-3 left-3 bg-surface-card border border-slate-800 px-2 py-1 rounded font-mono text-[9px] text-primary-blue flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-blue animate-pulse" />
-                SYSTEM_LIVE
-              </div>
-
-              <div className="absolute bottom-3 right-3 bg-surface-card border border-slate-800 px-2 py-1 rounded font-mono text-[9px] text-accent-purple">
-                L_NODE: #5379
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Floating Orbiting Bubbles (Fulfill "Floating technology icons") */}
-          <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-            className="absolute top-10 -left-6 bg-surface-card border border-slate-800 p-2.5 rounded-xl shadow-lg"
-          >
-            <span className="text-xl">⚛️</span>
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 1 }}
-            className="absolute bottom-10 -right-4 bg-surface-card border border-slate-800 p-2.5 rounded-xl shadow-lg"
-          >
-            <span className="text-xl">🤖</span>
-          </motion.div>
-
-          <motion.div
-            animate={{ x: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 0.5 }}
-            className="absolute top-1/2 -right-8 bg-surface-card border border-slate-800 p-2.5 rounded-xl shadow-lg font-mono text-xs text-primary-blue"
-          >
-            {"{ TS }"}
+            {renderAvatar(false)}
           </motion.div>
         </div>
       </div>

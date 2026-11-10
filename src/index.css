@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
@@ -42,8 +42,128 @@ pre, code, .font-mono {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-surface-card);
-  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-blue);
+}
+
+/* =========================================================================
+   STRICT 1-PAGE PRINT & PDF EXPORT STYLES
+   Ensures clicking "Print / Save PDF" produces an immaculate 1-page document
+   without printing background site components or creating multiple pages.
+   ========================================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 6mm 10mm;
+  }
+
+  /* Reset document flow for printing */
+  html, body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    overflow: visible !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 8.5pt !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Hide entire page structure except the resume modal */
+  #portfolio-header,
+  main,
+  footer,
+  #portfolio-app-root > *:not(#resume-modal-overlay),
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Make modal overlay static and transparent */
+  #resume-modal-overlay {
+    position: static !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Force container to look like standard white paper document */
+  #resume-modal-container {
+    position: static !important;
+    display: block !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* High contrast colors and clean styling for print */
+  #resume-modal-container * {
+    color: #1f2937 !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  #resume-modal-container h1 {
+    color: #0f172a !important;
+    font-size: 15pt !important;
+    line-height: 1.1 !important;
+    margin-bottom: 2pt !important;
+  }
+
+  #resume-modal-container h2 {
+    color: #1e40af !important; /* Professional dark blue section headers */
+    border-bottom: 1.2px solid #2563eb !important;
+    font-size: 8.5pt !important;
+    font-weight: 700 !important;
+    margin-top: 4pt !important;
+    margin-bottom: 2pt !important;
+    padding-bottom: 1pt !important;
+  }
+
+  #resume-modal-container a {
+    text-decoration: none !important;
+    color: #1f2937 !important;
+  }
+
+  #resume-modal-container ul {
+    margin: 0 !important;
+    padding-left: 12pt !important;
+  }
+
+  #resume-modal-container li {
+    margin-bottom: 1.5pt !important;
+    line-height: 1.2 !important;
+  }
+
+  #resume-modal-container .resume-role-title {
+    color: #0f172a !important;
+    font-weight: 600 !important;
+  }
+
+  #resume-modal-container .resume-sub-title {
+    color: #2563eb !important;
+    font-weight: 600 !important;
+    font-size: 9pt !important;
+  }
+
+  /* Avoid unwanted page splits */
+  .resume-section {
+    page-break-inside: avoid !important;
+  }
 }

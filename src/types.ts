@@ -12,14 +12,15 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  percent: number;
-  level: string; // e.g., "Expert", "Proficient"
-  icon: string; // lucide icon name
+  level?: string; // e.g., "Advanced", "Proficient"
+  icon?: string;  // lucide icon name
+  percent?: number;
 }
 
 export interface SkillCategory {
   title: string;
   icon: string;
+  description?: string;
   items: Skill[];
 }
 
@@ -37,7 +38,7 @@ export interface TimelineItem {
   title: string;
   organization: string;
   description: string;
-  type: 'experience' | 'freelance' | 'milestone' | 'certification';
+  type: 'experience' | 'freelance' | 'education' | 'certification';
   tech?: string[];
 }
 
@@ -48,12 +49,4 @@ export interface Testimonial {
   company: string;
   text: string;
   avatar: string;
-}
-
-export interface PromptTemplate {
-  name: string;
-  systemPrompt: string;
-  userPromptTemplate: string;
-  variables: { name: string; placeholder: string; defaultValue: string; options?: string[] }[];
-  outputResponse: string;
 }
