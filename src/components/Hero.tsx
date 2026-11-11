@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Download, Mail, Github, Linkedin } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
 import { PERSONAL_INFO } from '../data';
-import avatarImg from '../assets/images/portfolio_pic.jpg';
+import avatarImg from '../assets/images/portfolio_pic.png';
 
 interface HeroProps {
   onOpenContact: () => void;

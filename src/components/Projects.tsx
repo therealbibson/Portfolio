@@ -5,10 +5,10 @@ import { Project } from '../types';
 import { Github, ExternalLink, X } from 'lucide-react';
 
 export default function Projects() {
-  const [filter, setFilter] = useState<'All' | 'Frontend' | 'Backend' | 'Mobile' | 'AI'>('All');
+  const [filter, setFilter] = useState<'All' | 'Website' | 'Webapp' | 'Mobile' | 'AI'>('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const categories: ('All' | 'Frontend' | 'Backend' | 'Mobile' | 'AI')[] = ['All', 'Frontend', 'Backend', 'Mobile', 'AI'];
+  const categories: ('All' | 'Website' | 'Webapp' | 'Mobile' | 'AI')[] = ['All', 'Website', 'Webapp', 'Mobile', 'AI'];
 
   const filteredProjects = PROJECTS.filter((p) => {
     if (filter === 'All') return true;
@@ -127,16 +127,16 @@ export default function Projects() {
                         <Github size={15} />
                         <span>Code</span>
                       </a>
-                      {project.demoUrl && (
+                      {project.projectUrl && (
                         <a
-                          href={project.demoUrl}
+                          href={project.projectUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-slate-400 hover:text-primary-blue transition-colors flex items-center gap-1"
-                          title="Live Demo"
+                          title="Project URL"
                         >
                           <ExternalLink size={15} />
-                          <span>Demo</span>
+                          <span>Project</span>
                         </a>
                       )}
                     </div>
@@ -225,15 +225,15 @@ export default function Projects() {
                     <Github size={14} />
                     View on GitHub
                   </a>
-                  {selectedProject.demoUrl && (
+                  {selectedProject.projectUrl && (
                     <a
-                      href={selectedProject.demoUrl}
+                      href={selectedProject.projectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white flex items-center gap-2 transition-colors"
                     >
                       <ExternalLink size={14} />
-                      Live Demo
+                      View Project
                     </a>
                   )}
                 </div>

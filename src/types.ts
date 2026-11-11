@@ -2,10 +2,10 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  category: 'Frontend' | 'Backend' | 'Mobile' | 'AI';
+  category: 'Website' | 'Webapp' | 'Mobile' | 'AI';
   techStack: string[];
   github: string;
-  demoUrl: string;
+  projectUrl: string;
   image: string;
   details: string[];
 }

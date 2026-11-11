@@ -1,4 +1,8 @@
 import { Project, SkillCategory, Service, TimelineItem } from './types';
+import DigitalPearlsImg from './assets/images/digitalpearlsimg.png';
+import SafeBiteImg from './assets/images/safebiteimg.png';
+import HustlrImg from './assets/images/hustlrimg.png';
+import SpendwiseApp from './assets/images/spendwiseapp.jpg';
 
 export const PERSONAL_INFO = {
   name: "Usman Abeeb",
@@ -119,14 +123,14 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: "nexus-agent",
-    title: "Nexus AI Agent Orchestrator",
-    description: "A developer workflow platform for designing, running, and visualizing multi-step AI agent workflows with semantic routing.",
-    category: "AI",
-    techStack: ["React", "TypeScript", "Node.js", "Gemini API", "Tailwind CSS"],
-    github: "https://github.com/therealbibson",
-    demoUrl: "https://github.com/therealbibson",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    id: "Digital Pearls",
+    title: "Digital Pearls - Technology Advisory",
+    description: "A Precision Architecture for High-Stakes Technology.",
+    category: "Website",
+    techStack: ["Next.js", "TypeScript", "Node.js", "Tailwind CSS"],
+    github: "https://github.com/therealbibson/Digital-Pearls",
+    projectUrl: "https://digitalpearls.vercel.app/",
+    image: DigitalPearlsImg,
     details: [
       "Engineered a visual node-based workflow builder connecting prompt templates to structured execution steps.",
       "Integrated Gemini API with structured JSON output enforcement and error validation.",
@@ -134,14 +138,14 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
-    id: "nova-gateway",
-    title: "Nova API Gateway",
-    description: "A lightweight, resilient API gateway service featuring token-bucket rate limiting, authentication, and fast response caching.",
-    category: "Backend",
-    techStack: ["Node.js", "Express.js", "Redis", "TypeScript", "Docker"],
-    github: "https://github.com/therealbibson",
-    demoUrl: "https://github.com/therealbibson",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    id: "Hustlr",
+    title: "Hustlr",
+    description: "Launch your online shop in 5 minutes. Get payments, manage orders, and deliver anywhere in Nigeria — all in one place.",
+    category: "Webapp",
+    techStack: ["Next.js", "TypeScript", "Node.js", "Express.js", "Tailwind CSS", "MongoDB"],
+    github: "https://github.com/therealbibson/hustlr",
+    projectUrl: "https://www.hustlr.shop/",
+    image: HustlrImg,
     details: [
       "Implemented Redis-based rate limiting to prevent API abuse and handle high concurrent request volumes.",
       "Secured endpoints using JWT verification with automated token expiration and revocation lists.",
@@ -149,14 +153,14 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
-    id: "hyperion-fitness",
-    title: "Hyperion Mobile Fitness Tracker",
-    description: "An offline-first cross-platform mobile app for tracking workout regimens, logging sets and weights, and reviewing progress analytics.",
-    category: "Mobile",
-    techStack: ["React Native", "Expo", "SQLite", "TypeScript"],
-    github: "https://github.com/therealbibson",
-    demoUrl: "https://github.com/therealbibson",
-    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
+    id: "SafeBite",
+    title: "SafeBite - Food Delivery App",
+    description: "The fastest delivery in town, They focus on bringing your favorite flavors right to your doorstep.",
+    category: "Webapp",
+    techStack: ["React", "Node.js", "Tailwind CSS", "Express.js", "MongoDB", "JavaScript"],
+    github: "https://github.com/therealbibson/SafeBites",
+    projectUrl: "https://safe-bites-cyan.vercel.app/",
+    image: SafeBiteImg,
     details: [
       "Built an offline-first SQLite database layer allowing full offline functionality without network dependencies.",
       "Created smooth, responsive touch interfaces and intuitive workout logging screens.",
@@ -164,14 +168,14 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
-    id: "vapor-audio",
-    title: "Vapor Web Audio Synthesizer",
-    description: "An interactive browser audio synthesizer with real-time waveform visualization powered by the Web Audio API and HTML5 Canvas.",
-    category: "Frontend",
-    techStack: ["React", "TypeScript", "Web Audio API", "HTML5 Canvas", "Tailwind CSS"],
-    github: "https://github.com/therealbibson",
-    demoUrl: "https://github.com/therealbibson",
-    image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80",
+    id: "Spendwise",
+    title: "Spendwise - MiniApp Wallet",
+    description: "Track your expenses, set budgets, and gain insights into your spending habits with our intuitive finance management tool.",
+    category: "Mobile",
+    techStack: ["React", "JavaScript", "Tailwind CSS", "CeloSmartContracts",],
+    github: "https://github.com/therealbibson/SpendWise-Miniapp",
+    projectUrl: "https://spend-wise-miniapp.vercel.app/",
+    image: SpendwiseApp,
     details: [
       "Engineered real-time audio oscillator controls with customizable frequency, detune, and filter envelopes.",
       "Rendered 60 FPS frequency visualizers using high-performance HTML5 Canvas draw loops.",
@@ -185,7 +189,7 @@ export const PROJECTS: Project[] = [
     category: "AI",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Express.js"],
     github: "https://github.com/therealbibson",
-    demoUrl: "https://github.com/therealbibson",
+    projectUrl: "https://github.com/therealbibson",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
     details: [
       "Developed dynamic side-by-side prompt testing panels to compare output consistency across models.",
@@ -227,4 +231,3 @@ export const TIMELINE: TimelineItem[] = [
 
 export const PROMPT_PLAYGROUND_TEMPLATES: any[] = [];
 export const TESTIMONIALS: any[] = [];
-
