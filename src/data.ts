@@ -3,6 +3,7 @@ import DigitalPearlsImg from './assets/images/digitalpearlsimg.png';
 import SafeBiteImg from './assets/images/safebiteimg.png';
 import HustlrImg from './assets/images/hustlrimg.png';
 import SpendwiseApp from './assets/images/spendwiseapp.jpg';
+import ReviewbotImg from './assets/images/reviewbotimg.png';
 
 export const PERSONAL_INFO = {
   name: "Usman Abeeb",
@@ -172,7 +173,7 @@ export const PROJECTS: Project[] = [
     title: "Spendwise - MiniApp Wallet",
     description: "Track your expenses, set budgets, and gain insights into your spending habits with our intuitive finance management tool.",
     category: "Mobile",
-    techStack: ["React", "JavaScript", "Tailwind CSS", "CeloSmartContracts",],
+    techStack: ["React", "JavaScript", "Tailwind CSS", "Celo Builders"],
     github: "https://github.com/therealbibson/SpendWise-Miniapp",
     projectUrl: "https://spend-wise-miniapp.vercel.app/",
     image: SpendwiseApp,
@@ -180,6 +181,21 @@ export const PROJECTS: Project[] = [
       "Engineered real-time audio oscillator controls with customizable frequency, detune, and filter envelopes.",
       "Rendered 60 FPS frequency visualizers using high-performance HTML5 Canvas draw loops.",
       "Built an intuitive dark interface with accessible slider controls and preset saving."
+    ]
+  },
+  {
+    id: "Reviewbot AI",
+    title: "Reviewbot AI",
+    description: "Evidence-based review system for Celo and AskBots - On-chain auditor for AI agents on Celo",
+    category: "AI",
+    techStack: ["React", "TypeScript", "Tailwind CSS", "Celo Builders"],
+    github: "https://github.com/therealbibson/ReviewBot.cole",
+    projectUrl: "https://reviewbot-celo.onrender.com/",
+    image: ReviewbotImg,
+    details: [
+      "Developed dynamic side-by-side prompt testing panels to compare output consistency across models.",
+      "Implemented automated cost and latency estimates based on token counts.",
+      "Rendered structured markdown and code output cleanly with syntax highlighting."
     ]
   },
   {
