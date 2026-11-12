@@ -13,7 +13,7 @@ export const PERSONAL_INFO = {
   email: "uabeeb3@gmail.com",
   location: "Available for Remote & Contract roles",
   github: "https://github.com/therealbibson",
-  linkedin: "https://linkedin.com/in/usman-abeeb-9a998a279?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+  linkedin: "https://linkedin.com/in/usman-abeeb-9a998a279",
   twitter: "https://x.com/theRealBibson",
   experienceYears: 3,
   projectsCompleted: 15,
@@ -133,9 +133,9 @@ export const PROJECTS: Project[] = [
     projectUrl: "https://digitalpearls.vercel.app/",
     image: DigitalPearlsImg,
     details: [
-      "Engineered a visual node-based workflow builder connecting prompt templates to structured execution steps.",
-      "Integrated Gemini API with structured JSON output enforcement and error validation.",
-      "Built a real-time execution log viewer to monitor token usage and response latency."
+      "Designed a premium landing experience that clearly communicates technology advisory services, enterprise value, and conversion-focused messaging.",
+      "Built responsive sections for service positioning, brand storytelling, and client-facing credibility to support a high-trust advisory identity.",
+      "Implemented a clean frontend architecture using Next.js, TypeScript, and Tailwind CSS for a polished, scalable presentation layer."
     ]
   },
   {
@@ -148,9 +148,9 @@ export const PROJECTS: Project[] = [
     projectUrl: "https://www.hustlr.shop/",
     image: HustlrImg,
     details: [
-      "Implemented Redis-based rate limiting to prevent API abuse and handle high concurrent request volumes.",
-      "Secured endpoints using JWT verification with automated token expiration and revocation lists.",
-      "Containerized the service with Docker for easy deployment and consistent environments."
+      "Built a merchant-first e-commerce platform that lets businesses launch online shops quickly with order, payment, and delivery tooling in one system.",
+      "Designed storefront and business flows around Nigerian market needs, including store setup, catalog management, and order processing experiences.",
+      "Implemented the backend with secure API patterns, role-aware access, and deployment-ready infrastructure using Node.js, Express, MongoDB, and Docker."
     ]
   },
   {
@@ -163,9 +163,9 @@ export const PROJECTS: Project[] = [
     projectUrl: "https://safe-bites-cyan.vercel.app/",
     image: SafeBiteImg,
     details: [
-      "Built an offline-first SQLite database layer allowing full offline functionality without network dependencies.",
-      "Created smooth, responsive touch interfaces and intuitive workout logging screens.",
-      "Developed local analytics charts to visualize lifting progress and session consistency over time."
+      "Created a food ordering experience with restaurant browsing, item selection, and checkout flows optimized for quick, mobile-first transactions.",
+      "Built a responsive interface that surfaces menu items, delivery context, and customer-friendly interactions for a modern local delivery brand.",
+      "Integrated the frontend and backend into a cohesive delivery workflow with scalable API routes and data handling for menus, orders, and customer sessions."
     ]
   },
   {
@@ -178,9 +178,9 @@ export const PROJECTS: Project[] = [
     projectUrl: "https://spend-wise-miniapp.vercel.app/",
     image: SpendwiseApp,
     details: [
-      "Engineered real-time audio oscillator controls with customizable frequency, detune, and filter envelopes.",
-      "Rendered 60 FPS frequency visualizers using high-performance HTML5 Canvas draw loops.",
-      "Built an intuitive dark interface with accessible slider controls and preset saving."
+      "Designed a personal finance mini-app focused on expense tracking, budget awareness, and simple daily money management for users on the go.",
+      "Built an intuitive dashboard and transaction workflow that makes it easy to review spending patterns and understand financial habits at a glance.",
+      "Delivered a lightweight, mobile-friendly experience using React and wallet-oriented web patterns tailored for accessible, quick financial interactions."
     ]
   },
   {
@@ -193,9 +193,9 @@ export const PROJECTS: Project[] = [
     projectUrl: "https://reviewbot-celo.onrender.com/",
     image: ReviewbotImg,
     details: [
-      "Developed dynamic side-by-side prompt testing panels to compare output consistency across models.",
-      "Implemented automated cost and latency estimates based on token counts.",
-      "Rendered structured markdown and code output cleanly with syntax highlighting."
+      "Developed a Celo-focused review platform for evaluating AI agent outputs with structured evidence, reasoning checks, and user trust signals.",
+      "Built review workflows that compare outputs, highlight risks, and present findings in a clear, audit-friendly interface for both developers and stakeholders.",
+      "Created a polished frontend experience with actionable reporting, markdown-based result rendering, and a strong emphasis on transparent AI evaluation."
     ]
   },
   {
@@ -208,9 +208,9 @@ export const PROJECTS: Project[] = [
     projectUrl: "https://github.com/therealbibson",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
     details: [
-      "Developed dynamic side-by-side prompt testing panels to compare output consistency across models.",
-      "Implemented automated cost and latency estimates based on token counts.",
-      "Rendered structured markdown and code output cleanly with syntax highlighting."
+      "Created a centralized prompt analytics dashboard that helps teams test, benchmark, and compare AI responses across multiple model configurations.",
+      "Built evaluation views for latency, cost, and output quality so teams can monitor prompt performance with measurable operational insight.",
+      "Delivered a modular, data-driven experience using a modern frontend and API-backed workflow for scalable prompt experimentation and reporting."
     ]
   }
 ];
