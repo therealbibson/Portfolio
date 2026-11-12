@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Mail } from 'lucide-react';
+import { Menu, X, FileText } from 'lucide-react';
 import { PERSONAL_INFO } from '../data';
 
 interface HeaderProps {
   onOpenContact: () => void;
+  onOpenResume: () => void;
 }
 
-export default function Header({ onOpenContact }: HeaderProps) {
+export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -46,20 +47,20 @@ export default function Header({ onOpenContact }: HeaderProps) {
           : 'bg-transparent py-4 sm:py-5'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        {/* Brand Name */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between relative">
+        {/* Brand Name — Left */}
         <a
           href="#overview"
           onClick={(e) => handleNavClick(e, '#overview')}
-          className="group cursor-pointer py-1"
+          className="group cursor-pointer py-1 shrink-0"
         >
           <span className="font-display font-bold text-base tracking-tight text-white group-hover:text-primary-blue transition-colors">
             {PERSONAL_INFO.name}<span className="text-primary-blue">.</span>
           </span>
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Desktop Navigation — Centered absolutely */}
+        <nav className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -70,23 +71,27 @@ export default function Header({ onOpenContact }: HeaderProps) {
               {item.label}
             </a>
           ))}
-          <button
-            onClick={onOpenContact}
-            className="px-3.5 py-1.5 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white transition-colors cursor-pointer flex items-center gap-1.5"
-          >
-            <Mail size={13} />
-            Hire Me
-          </button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
-          aria-label="Toggle Navigation"
-        >
-          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Right side — Read the CV + Mobile Menu */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onOpenResume}
+            className="hidden md:flex px-3.5 py-1.5 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white transition-colors cursor-pointer items-center gap-1.5 shrink-0"
+          >
+            <FileText size={13} />
+            Read the CV
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+            aria-label="Toggle Navigation"
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
@@ -105,12 +110,12 @@ export default function Header({ onOpenContact }: HeaderProps) {
           <button
             onClick={() => {
               setMobileMenuOpen(false);
-              onOpenContact();
+              onOpenResume();
             }}
             className="mt-3 w-full py-2.5 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white text-center cursor-pointer flex items-center justify-center gap-2"
           >
-            <Mail size={14} />
-            Hire Me
+            <FileText size={14} />
+            Read the CV
           </button>
         </div>
       )}

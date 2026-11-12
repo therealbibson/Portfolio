@@ -50,11 +50,12 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         </div>
 
         {/* 1-Page Compact Document Canvas */}
-        <div className="p-5 sm:p-7 overflow-y-auto max-h-[85vh] print:max-h-none print:overflow-visible flex flex-col gap-2.5 text-left text-xs sm:text-[12px] leading-tight font-sans print:p-0 print:text-[8.5pt] print:leading-snug">
+        <div className="p-5 sm:p-7 overflow-y-auto max-h-[85vh] print:max-h-none print:overflow-visible print:h-auto flex flex-col gap-2.5 text-left text-xs sm:text-[12px] leading-tight font-sans print:p-0 print:gap-0 print:text-[8.5pt] print:leading-snug">
           
           {/* Header Block */}
           <div className="border-b border-slate-800 print:border-slate-300 pb-2 resume-section">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+            {/* Name + title vs contact — resume-header-row for print stacking */}
+            <div className="resume-header-row flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
               <div>
                 <h1 className="font-display font-bold text-xl sm:text-2xl text-text-white tracking-tight">
                   {PERSONAL_INFO.name}
@@ -64,8 +65,8 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 </p>
               </div>
 
-              {/* Contact Links */}
-              <div className="flex flex-wrap sm:justify-end gap-x-3 gap-y-0.5 text-[10.5px] sm:text-[11px] text-slate-300 print:text-neutral-700 font-mono pt-1 sm:pt-0">
+              {/* Contact Links — resume-contact-row wraps on narrow print */}
+              <div className="resume-contact-row flex flex-wrap gap-x-3 gap-y-0.5 text-[10.5px] sm:text-[11px] text-slate-300 print:text-neutral-700 font-mono pt-1 sm:pt-0">
                 <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-1 hover:underline">
                   <Mail size={11} className="text-primary-blue" />
                   <span>{PERSONAL_INFO.email}</span>
@@ -120,11 +121,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
             {/* Role 1 */}
             <div className="space-y-0.5">
-              <div className="flex justify-between items-baseline">
+              <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-text-white resume-role-title">
                   Full-Stack Software Engineer <span className="font-normal text-slate-400 print:text-neutral-600">— Tech Solutions & Engineering</span>
                 </span>
-                <span className="font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600">2024 – Present</span>
+                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600 shrink-0">2024 – Present</span>
               </div>
               <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
                 <li>Architected full-stack web applications using React, TypeScript, and Node.js with PostgreSQL persistence.</li>
@@ -134,11 +135,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
             {/* Role 2 */}
             <div className="space-y-0.5">
-              <div className="flex justify-between items-baseline">
+              <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-text-white resume-role-title">
                   Full-Stack & Mobile Developer <span className="font-normal text-slate-400 print:text-neutral-600">— Freelance & Startups</span>
                 </span>
-                <span className="font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600">2022 – 2024</span>
+                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600 shrink-0">2022 – 2024</span>
               </div>
               <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
                 <li>Built cross-platform iOS and Android mobile apps using React Native and Expo with offline-first SQLite synchronization.</li>
@@ -148,11 +149,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
             {/* Role 3 */}
             <div className="space-y-0.5">
-              <div className="flex justify-between items-baseline">
+              <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-text-white resume-role-title">
                   Frontend Developer <span className="font-normal text-slate-400 print:text-neutral-600">— Digital Interface Studio</span>
                 </span>
-                <span className="font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600">2021 – 2022</span>
+                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-400 print:text-neutral-600 shrink-0">2021 – 2022</span>
               </div>
               <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
                 <li>Developed modular, accessible UI components and optimized Core Web Vitals to deliver sub-second page loads.</li>
@@ -160,7 +161,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             </div>
           </div>
 
-          {/* All 5 Projects Section */}
+          {/* All Projects Section */}
           <div className="space-y-1 resume-section">
             <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-800 pb-0.5">
               Featured Projects ({PROJECTS.length})
@@ -169,9 +170,12 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <div className="space-y-1 text-[10.5px] sm:text-[11px]">
               {PROJECTS.map((project) => (
                 <div key={project.id} className="space-y-0.5">
-                  <div className="flex justify-between items-baseline">
+                  <div>
                     <span className="font-semibold text-text-white resume-role-title">
-                      {project.title} <span className="font-mono font-normal text-[9.5px] text-slate-400 print:text-neutral-600">| {project.techStack.join(', ')}</span>
+                      {project.title}
+                    </span>{' '}
+                    <span className="resume-tech-tag font-mono font-normal text-[9.5px] text-slate-400 print:text-neutral-500">
+                      | {project.techStack.join(', ')}
                     </span>
                   </div>
                   <p className="text-slate-300 print:text-neutral-700">

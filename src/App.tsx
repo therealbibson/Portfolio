@@ -32,7 +32,7 @@ export default function App() {
   return (
     <div id="portfolio-app-root" className="relative min-h-screen bg-bg-primary text-text-white antialiased">
       <InteractiveBackground />
-      <Header onOpenContact={handleOpenContact} />
+      <Header onOpenContact={handleOpenContact} onOpenResume={handleOpenResume} />
       <main className="relative z-10 w-full">
         <Hero onOpenContact={handleOpenContact} onOpenResume={handleOpenResume} />
         <About />
