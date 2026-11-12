@@ -39,7 +39,7 @@ export default function App() {
         <Skills />
         <Services onOpenContact={handleOpenContact} />
         <Projects />
-        <Timeline />
+        {/* <Timeline /> */}
         <Contact />
       </main>
       <Footer />

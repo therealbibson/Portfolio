@@ -215,35 +215,35 @@ export const PROJECTS: Project[] = [
   }
 ];
 
-export const TIMELINE: TimelineItem[] = [
-  {
-    id: "lead-dev",
-    period: "2024 - Present",
-    title: "Full-Stack Software Engineer",
-    organization: "Tech Solutions & Engineering",
-    description: "Architecting full-stack web applications, designing scalable REST APIs, and integrating modern AI capabilities into client-facing products.",
-    type: "experience",
-    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Docker", "LLM APIs"]
-  },
-  {
-    id: "freelance-fullstack",
-    period: "2022 - 2024",
-    title: "Full-Stack & Mobile Developer",
-    organization: "Freelance & Startup Projects",
-    description: "Collaborated with clients to build responsive web applications, mobile apps with offline support, and backend API integrations.",
-    type: "freelance",
-    tech: ["React Native", "Expo", "Express.js", "Tailwind CSS", "MongoDB", "SQLite"]
-  },
-  {
-    id: "senior-front",
-    period: "2021 - 2022",
-    title: "Frontend Developer",
-    organization: "Digital Interface Studio",
-    description: "Developed modern, accessible UI components, optimized web vitals, and implemented responsive layouts with modern JavaScript and React.",
-    type: "experience",
-    tech: ["React", "JavaScript", "CSS3 / Sass", "Tailwind CSS", "Git"]
-  }
-];
+// export const TIMELINE: TimelineItem[] = [
+//   {
+//     id: "lead-dev",
+//     period: "2024 - Present",
+//     title: "Full-Stack Software Engineer",
+//     organization: "Tech Solutions & Engineering",
+//     description: "Architecting full-stack web applications, designing scalable REST APIs, and integrating modern AI capabilities into client-facing products.",
+//     type: "experience",
+//     tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Docker", "LLM APIs"]
+//   },
+//   {
+//     id: "freelance-fullstack",
+//     period: "2022 - 2024",
+//     title: "Full-Stack & Mobile Developer",
+//     organization: "Freelance & Startup Projects",
+//     description: "Collaborated with clients to build responsive web applications, mobile apps with offline support, and backend API integrations.",
+//     type: "freelance",
+//     tech: ["React Native", "Expo", "Express.js", "Tailwind CSS", "MongoDB", "SQLite"]
+//   },
+//   {
+//     id: "senior-front",
+//     period: "2021 - 2022",
+//     title: "Frontend Developer",
+//     organization: "Digital Interface Studio",
+//     description: "Developed modern, accessible UI components, optimized web vitals, and implemented responsive layouts with modern JavaScript and React.",
+//     type: "experience",
+//     tech: ["React", "JavaScript", "CSS3 / Sass", "Tailwind CSS", "Git"]
+//   }
+// ];
 
 export const PROMPT_PLAYGROUND_TEMPLATES: any[] = [];
 export const TESTIMONIALS: any[] = [];
