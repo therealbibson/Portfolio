@@ -43,7 +43,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
       id="portfolio-header"
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
         scrolled || mobileMenuOpen
-          ? 'bg-bg-primary/95 backdrop-blur-md border-b border-slate-200 py-3 shadow-lg'
+          ? 'bg-bg-primary/95 backdrop-blur-md border-b border-slate-700 py-3 shadow-lg'
           : 'bg-transparent py-4 sm:py-5'
       }`}
     >
@@ -54,7 +54,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
           onClick={(e) => handleNavClick(e, '#overview')}
           className="group cursor-pointer py-1 shrink-0"
         >
-          <span className="font-display font-bold text-base tracking-tight text-slate-900 group-hover:text-primary-blue transition-colors">
+          <span className="font-display font-bold text-base tracking-tight text-text-white group-hover:text-primary-blue transition-colors">
             {PERSONAL_INFO.name}<span className="text-primary-blue">.</span>
           </span>
         </a>
@@ -66,7 +66,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
               key={item.href}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors"
+              className="text-xs font-medium text-slate-300 hover:text-text-white transition-colors"
             >
               {item.label}
             </a>
@@ -77,7 +77,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenResume}
-            className="hidden md:flex px-3.5 py-1.5 rounded-lg bg-primary-blue hover:bg-[#152a45] text-xs font-semibold text-white transition-colors cursor-pointer items-center gap-1.5 shrink-0"
+            className="hidden md:flex px-3.5 py-1.5 rounded-lg bg-[#4f739e] hover:bg-[#42607f] text-xs font-semibold text-white transition-colors cursor-pointer items-center gap-1.5 shrink-0"
           >
             <FileText size={13} />
             View Resume
@@ -86,7 +86,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            className="md:hidden p-2 rounded-lg text-slate-300 hover:text-text-white hover:bg-white/5 transition-colors"
             aria-label="Toggle Navigation"
           >
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -96,13 +96,13 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-surface-card/95 backdrop-blur-xl border-b border-slate-200 px-6 py-5 flex flex-col gap-3 text-left animate-in slide-in-from-top-2 duration-200">
+        <div className="md:hidden bg-surface-card/95 backdrop-blur-xl border-b border-slate-700 px-6 py-5 flex flex-col gap-3 text-left animate-in slide-in-from-top-2 duration-200">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="text-sm font-medium text-slate-700 hover:text-primary-blue py-1.5 transition-colors border-b border-slate-200"
+              className="text-sm font-medium text-slate-300 hover:text-primary-blue py-1.5 transition-colors border-b border-slate-700"
             >
               {item.label}
             </a>
@@ -112,7 +112,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
               setMobileMenuOpen(false);
               onOpenResume();
             }}
-            className="mt-3 w-full py-2.5 rounded-lg bg-primary-blue hover:bg-[#152a45] text-xs font-semibold text-white text-center cursor-pointer flex items-center justify-center gap-2"
+            className="mt-3 w-full py-2.5 rounded-lg bg-[#4f739e] hover:bg-[#42607f] text-xs font-semibold text-white text-center cursor-pointer flex items-center justify-center gap-2"
           >
             <FileText size={14} />
             View Resume

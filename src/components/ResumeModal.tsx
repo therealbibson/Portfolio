@@ -16,16 +16,16 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   return (
     <div
       id="resume-modal-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/40 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white print:static"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white print:static"
       onClick={onClose}
     >
       <div
         id="resume-modal-container"
-        className="relative w-full max-w-3xl bg-surface-card text-text-white rounded-xl shadow-2xl overflow-hidden flex flex-col my-auto border border-slate-200 print:my-0 print:border-none print:shadow-none print:bg-white print:text-neutral-900 print:rounded-none"
+        className="relative w-full max-w-3xl bg-surface-card text-text-white rounded-xl shadow-2xl overflow-hidden flex flex-col my-auto border border-slate-700 print:my-0 print:border-none print:shadow-none print:bg-white print:text-neutral-900 print:rounded-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar (Web view only, hidden when printing) */}
-        <div className="flex items-center justify-between px-5 py-3 bg-white border-b border-slate-200 text-text-white print:hidden">
+        <div className="flex items-center justify-between px-5 py-3 bg-surface-card border-b border-slate-700 text-text-white print:hidden">
           <span className="font-display font-semibold text-xs sm:text-sm">
             Resume — {PERSONAL_INFO.name} (Single-Page Format)
           </span>
@@ -33,7 +33,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="px-3.5 py-1.5 rounded-lg bg-primary-blue hover:bg-[#152a45] text-xs font-semibold text-white flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+              className="px-3.5 py-1.5 rounded-lg bg-[#4f739e] hover:bg-[#42607f] text-xs font-semibold text-white flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
               title="Save as 1-Page PDF or Print"
             >
               <Printer size={13} />
@@ -41,7 +41,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer transition-colors"
+              className="p-1.5 rounded-lg text-slate-300 hover:text-text-white hover:bg-white/5 cursor-pointer transition-colors"
               aria-label="Close"
             >
               <X size={16} />
@@ -53,7 +53,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         <div className="p-5 sm:p-7 overflow-y-auto max-h-[85vh] print:max-h-none print:overflow-visible print:h-auto flex flex-col gap-2.5 text-left text-xs sm:text-[12px] leading-tight font-sans print:p-0 print:gap-0 print:text-[8.5pt] print:leading-snug">
           
           {/* Header Block */}
-          <div className="border-b border-slate-200 print:border-slate-300 pb-2 resume-section">
+          <div className="border-b border-slate-700 print:border-slate-300 pb-2 resume-section">
             {/* Name + title vs contact — resume-header-row for print stacking */}
             <div className="resume-header-row flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
               <div>
@@ -66,7 +66,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               </div>
 
               {/* Contact Links — resume-contact-row wraps on narrow print */}
-              <div className="resume-contact-row flex flex-wrap gap-x-3 gap-y-0.5 text-[10.5px] sm:text-[11px] text-slate-600 print:text-neutral-700 font-mono pt-1 sm:pt-0">
+              <div className="resume-contact-row flex flex-wrap gap-x-3 gap-y-0.5 text-[10.5px] sm:text-[11px] text-slate-300 print:text-neutral-700 font-mono pt-1 sm:pt-0">
                 <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-1 hover:underline">
                   <Mail size={11} className="text-primary-blue" />
                   <span>{PERSONAL_INFO.email}</span>
@@ -87,35 +87,35 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             </div>
 
             {/* Brief Professional Summary */}
-            <p className="mt-1.5 text-slate-600 print:text-neutral-700 text-[11px] sm:text-xs leading-relaxed">
+            <p className="mt-1.5 text-slate-300 print:text-neutral-700 text-[11px] sm:text-xs leading-relaxed">
               Full-Stack Developer with 3+ years of experience building responsive web frontends, scalable REST APIs, and cross-platform mobile apps. Proficient in TypeScript, React, Next.js, Node.js, and React Native with practical experience integrating LLM APIs into production applications.
             </p>
           </div>
 
           {/* Technical Skills */}
           <div className="space-y-1 resume-section">
-            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-200 pb-0.5">
+            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-700 pb-0.5">
               Technical Skills
             </h2>
             <div className="space-y-0.5 text-[10.5px] sm:text-[11.5px]">
               <div>
                 <span className="font-semibold text-text-white resume-role-title">Languages & Frontend: </span>
-                <span className="text-slate-600 print:text-neutral-700">TypeScript, JavaScript, React, Next.js, Tailwind CSS, HTML5/CSS3, Zustand, Redux.</span>
+                <span className="text-slate-300 print:text-neutral-700">TypeScript, JavaScript, React, Next.js, Tailwind CSS, HTML5/CSS3, Zustand, Redux.</span>
               </div>
               <div>
                 <span className="font-semibold text-text-white resume-role-title">Backend & Cloud: </span>
-                <span className="text-slate-600 print:text-neutral-700">Node.js, Express.js, PostgreSQL, MongoDB, RESTful APIs, Redis, Docker.</span>
+                <span className="text-slate-300 print:text-neutral-700">Node.js, Express.js, PostgreSQL, MongoDB, RESTful APIs, Redis, Docker.</span>
               </div>
               <div>
                 <span className="font-semibold text-text-white resume-role-title">Mobile & Tools: </span>
-                <span className="text-slate-600 print:text-neutral-700">React Native, Expo, SQLite, Git, Linux, LLM APIs (Gemini, Claude, OpenAI).</span>
+                <span className="text-slate-300 print:text-neutral-700">React Native, Expo, SQLite, Git, Linux, LLM APIs (Gemini, Claude, OpenAI).</span>
               </div>
             </div>
           </div>
 
           {/* Work Experience */}
           <div className="space-y-1.5 resume-section">
-            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-200 pb-0.5">
+            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-700 pb-0.5">
               Work Experience
             </h2>
 
@@ -123,11 +123,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <div className="space-y-0.5">
               <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-text-white resume-role-title">
-                  Full-Stack Software Engineer <span className="font-normal text-slate-600 print:text-neutral-600">— Tech Solutions & Engineering</span>
+                  Full-Stack Software Engineer <span className="font-normal text-slate-300 print:text-neutral-600">— Tech Solutions & Engineering</span>
                 </span>
-                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-600 print:text-neutral-600 shrink-0">2024 – Present</span>
+                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">2024 – Present</span>
               </div>
-              <ul className="list-disc list-inside text-slate-600 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
                 <li>Architected full-stack web applications using React, TypeScript, and Node.js with PostgreSQL persistence.</li>
                 <li>Designed secure RESTful APIs with JWT authentication, Redis caching, and integrated Gemini LLM workflows for automated data parsing.</li>
               </ul>
@@ -137,11 +137,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <div className="space-y-0.5">
               <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-text-white resume-role-title">
-                  Full-Stack & Mobile Developer <span className="font-normal text-slate-600 print:text-neutral-600">— Freelance & Startups</span>
+                  Full-Stack & Mobile Developer <span className="font-normal text-slate-300 print:text-neutral-600">— Freelance & Startups</span>
                 </span>
-                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-600 print:text-neutral-600 shrink-0">2022 – 2024</span>
+                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">2022 – 2024</span>
               </div>
-              <ul className="list-disc list-inside text-slate-600 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
                 <li>Built cross-platform iOS and Android mobile apps using React Native and Expo with offline-first SQLite synchronization.</li>
                 <li>Engineered responsive client dashboards and integrated third-party payment and messaging APIs.</li>
               </ul>
@@ -151,11 +151,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <div className="space-y-0.5">
               <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
                 <span className="font-semibold text-text-white resume-role-title">
-                  Frontend Developer <span className="font-normal text-slate-600 print:text-neutral-600">— Digital Interface Studio</span>
+                  Frontend Developer <span className="font-normal text-slate-300 print:text-neutral-600">— Digital Interface Studio</span>
                 </span>
-                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-600 print:text-neutral-600 shrink-0">2021 – 2022</span>
+                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">2021 – 2022</span>
               </div>
-              <ul className="list-disc list-inside text-slate-600 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
                 <li>Developed modular, accessible UI components and optimized Core Web Vitals to deliver sub-second page loads.</li>
               </ul>
             </div>
@@ -163,7 +163,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
 
           {/* All Projects Section */}
           <div className="space-y-1 resume-section">
-            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-200 pb-0.5">
+            <h2 className="font-display font-bold text-[10.5px] uppercase tracking-wider text-primary-blue border-b border-slate-700 pb-0.5">
               Featured Projects ({PROJECTS.length})
             </h2>
 
@@ -174,11 +174,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                     <span className="font-semibold text-text-white resume-role-title">
                       {project.title}
                     </span>{' '}
-                    <span className="resume-tech-tag font-mono font-normal text-[9.5px] text-slate-600 print:text-neutral-500">
+                    <span className="resume-tech-tag font-mono font-normal text-[9.5px] text-slate-300 print:text-neutral-500">
                       | {project.techStack.join(', ')}
                     </span>
                   </div>
-                  <p className="text-slate-600 print:text-neutral-700">
+                  <p className="text-slate-300 print:text-neutral-700">
                     {project.description}
                   </p>
                 </div>

@@ -6,7 +6,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-200"
+      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-700"
     >
       <div className="flex flex-col items-start text-left gap-4 mb-12">
         <span className="text-xs font-mono font-medium tracking-wider text-primary-blue uppercase">
@@ -15,7 +15,7 @@ export default function Skills() {
         <h2 className="font-display font-bold text-3xl sm:text-4xl text-text-white tracking-tight">
           Tools, Languages & Frameworks
         </h2>
-        <p className="text-sm sm:text-base text-slate-600 max-w-2xl">
+        <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
           Technologies and tools I use to develop robust, production-grade applications — 3+ years working across this stack.
         </p>
       </div>
@@ -29,11 +29,11 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="p-6 rounded-xl bg-surface-card border border-slate-200 flex flex-col gap-5 hover:border-slate-300 transition-colors"
+              className="p-6 rounded-xl bg-surface-card border border-slate-700 flex flex-col gap-5 hover:border-slate-600 transition-colors"
             >
               {/* Category Header */}
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-bg-primary flex items-center justify-center border border-slate-200 text-primary-blue">
+                <div className="w-9 h-9 rounded-lg bg-bg-primary flex items-center justify-center border border-slate-700 text-primary-blue">
                   <DynamicIcon name={category.icon} size={18} />
                 </div>
                 <div>
@@ -41,7 +41,7 @@ export default function Skills() {
                     {category.title}
                   </h3>
                   {category.description && (
-                    <p className="text-xs text-slate-600">
+                    <p className="text-xs text-slate-300">
                       {category.description}
                     </p>
                   )}
@@ -53,14 +53,14 @@ export default function Skills() {
                 {category.items.map((skill) => (
                   <div
                     key={skill.name}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg-primary/80 border border-slate-200 text-xs text-slate-700 hover:border-primary-blue/40 transition-colors"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg-primary/80 border border-slate-700 text-xs text-slate-300 hover:border-primary-blue/40 transition-colors"
                   >
                     {skill.icon && (
                       <DynamicIcon name={skill.icon} size={13} className="text-primary-blue" />
                     )}
                     <span>{skill.name}</span>
                     {skill.level && (
-                      <span className="text-[10px] text-slate-600 font-mono">
+                      <span className="text-[10px] text-slate-300 font-mono">
                         ({skill.level})
                       </span>
                     )}

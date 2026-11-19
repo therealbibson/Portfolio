@@ -6,13 +6,13 @@
   --font-display: "Sora", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
 
-  /* Clean light professional palette — white, navy and slate */
-  --color-bg-primary: #f8fafc;
-  --color-surface-card: #ffffff;
-  --color-primary-blue: #1e3a5f;
-  --color-accent-purple: #1e3a5f;
-  --color-text-white: #0f172a;
-  --color-text-secondary: #475569;
+  /* Refined dark professional palette — charcoal with a muted blue */
+  --color-bg-primary: #1a1d21;
+  --color-surface-card: #24282e;
+  --color-primary-blue: #7fa3c7;
+  --color-accent-purple: #7fa3c7;
+  --color-text-white: #e8eaed;
+  --color-text-secondary: #a3adb8;
 }
 
 /* Base custom styles to reinforce typography */
@@ -41,7 +41,7 @@ pre, code, .font-mono {
   background: var(--color-bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface-card);
+  background: #3a4048;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-blue);

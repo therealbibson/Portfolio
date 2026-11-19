@@ -91,18 +91,18 @@ export default function AIExpertise() {
       title: "Schema validation check",
       desc: "The output code blocks or raw JSON is parsed against Zod structures, with automatic retries on syntax mismatch.",
       icon: "CheckCircle2",
-      color: "border-emerald-600 text-emerald-700 bg-emerald-50"
+      color: "border-emerald-500/40 text-emerald-300 bg-emerald-500/10"
     }
   ];
 
   return (
     <section
       id="ai-playground"
-      className="relative py-24 max-w-7xl mx-auto px-6 overflow-hidden border-t border-slate-200 text-left"
+      className="relative py-24 max-w-7xl mx-auto px-6 overflow-hidden border-t border-slate-700 text-left"
     >
       {/* Heading Group */}
       <div className="flex flex-col items-start gap-6 mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-slate-200">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card/80 border border-slate-700">
           <span className="text-[10px] sm:text-xs font-mono font-medium tracking-wider text-primary-blue">
             06 // PROMPT ENGINEERING & AGENTS
           </span>
@@ -124,7 +124,7 @@ export default function AIExpertise() {
         {/* Left Hand: Playground Board (lg:col-span-8) */}
         <div className="lg:col-span-8 flex flex-col gap-6" id="playground-board">
           {/* Template segment selector */}
-          <div className="flex flex-col sm:flex-row gap-2 bg-surface-card border border-slate-200 p-1.5 rounded-xl backdrop-blur-sm">
+          <div className="flex flex-col sm:flex-row gap-2 bg-surface-card border border-slate-700 p-1.5 rounded-xl backdrop-blur-sm">
             {PROMPT_PLAYGROUND_TEMPLATES.map((tmpl, idx) => (
               <button
                 key={tmpl.name}
@@ -132,8 +132,8 @@ export default function AIExpertise() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`flex-1 px-4 py-2.5 rounded-lg text-xs font-semibold tracking-tight font-sans transition-all duration-200 cursor-pointer ${
                   selectedIdx === idx
-                    ? 'bg-bg-primary font-bold border border-slate-200 text-primary-blue'
-                    : 'text-text-secondary hover:text-text-white hover:bg-bg-primary/50'
+                    ? 'bg-bg-primary font-bold border border-slate-700 text-primary-blue'
+                    : 'text-text-secondary hover:text-text-white hover:bg-white/5'
                 }`}
               >
                 {tmpl.name}
@@ -142,14 +142,14 @@ export default function AIExpertise() {
           </div>
 
           {/* Core Interactive Board Console */}
-          <div className="rounded-2xl bg-surface-card border border-slate-200 p-6 sm:p-8 backdrop-blur-md shadow-xl flex flex-col gap-6">
+          <div className="rounded-2xl bg-surface-card border border-slate-700 p-6 sm:p-8 backdrop-blur-md shadow-xl flex flex-col gap-6">
             <div className="flex items-center gap-2 text-xs font-bold text-text-secondary font-mono tracking-wider uppercase">
               <Terminal size={14} className="text-primary-blue animate-pulse" />
               Interactive Template Compiler
             </div>
 
             {/* Editable Variable Inputs box */}
-            <div className="p-5 rounded-xl bg-bg-primary border border-slate-200 flex flex-col gap-4">
+            <div className="p-5 rounded-xl bg-bg-primary border border-slate-700 flex flex-col gap-4">
               <span className="text-xs text-text-secondary font-display font-semibold">
                 Adjust Variables (Simulate Client Use-case)
               </span>
@@ -163,7 +163,7 @@ export default function AIExpertise() {
                     <input
                       id={`input-var-${variable.name}`}
                       type="text"
-                      className="w-full bg-surface-card border border-slate-200 focus:border-primary-blue/50 rounded-lg p-2.5 text-xs text-text-secondary font-sans focus:outline-none focus:ring-1 focus:ring-primary-blue/10 placeholder-slate-600 transition-all duration-200"
+                      className="w-full bg-surface-card border border-slate-700 focus:border-primary-blue/50 rounded-lg p-2.5 text-xs text-text-secondary font-sans focus:outline-none focus:ring-1 focus:ring-primary-blue/10 placeholder-slate-500 transition-all duration-200"
                       placeholder={variable.placeholder}
                       value={variables[variable.name] || ''}
                       onChange={(e) => handleVariableChange(variable.name, e.target.value)}
@@ -180,15 +180,15 @@ export default function AIExpertise() {
                 <button
                   id="playground-copy-btn"
                   onClick={handleCopyPrompt}
-                  className="px-2.5 py-1 text-[11px] rounded bg-surface-card border border-slate-200 hover:border-slate-300 text-text-secondary hover:text-text-white font-sans flex items-center gap-1.5 cursor-pointer"
+                  className="px-2.5 py-1 text-[11px] rounded bg-surface-card border border-slate-700 hover:border-slate-600 text-text-secondary hover:text-text-white font-sans flex items-center gap-1.5 cursor-pointer"
                 >
-                  {isCopied ? <Check size={12} className="text-emerald-700" /> : <Lightbulb size={12} />}
+                  {isCopied ? <Check size={12} className="text-emerald-300" /> : <Lightbulb size={12} />}
                   {isCopied ? 'Copied' : 'Copy Full Template'}
                 </button>
               </div>
 
               {/* Dynamic Read-Only Output Prompt block */}
-              <div className="p-4 rounded-xl bg-bg-primary border border-slate-200 font-mono text-[11px] sm:text-xs text-text-secondary leading-relaxed max-h-[160px] overflow-y-auto select-all text-left">
+              <div className="p-4 rounded-xl bg-bg-primary border border-slate-700 font-mono text-[11px] sm:text-xs text-text-secondary leading-relaxed max-h-[160px] overflow-y-auto select-all text-left">
                 <span className="text-primary-blue font-bold block mb-1">{"/* System Instruction */"}</span>
                 <p className="mb-3 text-text-secondary">{template.systemPrompt}</p>
 
@@ -204,8 +204,8 @@ export default function AIExpertise() {
               disabled={isRunning}
               className={`w-full py-3.5 rounded-xl text-xs sm:text-sm font-bold shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
                 isRunning
-                  ? 'bg-slate-100 border border-slate-200 text-slate-700 cursor-wait'
-                  : 'bg-primary-blue text-white hover:opacity-90'
+                  ? 'bg-white/5 border border-slate-700 text-slate-300 cursor-wait'
+                  : 'bg-[#4f739e] text-white hover:opacity-90'
               }`}
             >
               {isRunning ? (
@@ -229,11 +229,11 @@ export default function AIExpertise() {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="rounded-xl border border-slate-200 bg-bg-primary overflow-hidden flex flex-col text-left"
+                  className="rounded-xl border border-slate-700 bg-bg-primary overflow-hidden flex flex-col text-left"
                 >
-                  <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-bg-primary font-mono text-[9px] text-text-secondary">
+                  <div className="flex items-center justify-between px-4 py-2 border-b border-slate-700 bg-bg-primary font-mono text-[9px] text-text-secondary">
                     <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
                       COMPILER_RESPONSE OK
                     </span>
                     <span>LATENCY: 1.1s • TEMP: 0.2</span>
@@ -250,7 +250,7 @@ export default function AIExpertise() {
 
         {/* Right Hand: Interactive Agentic Workflow (lg:col-span-4) */}
         <div className="lg:col-span-4 flex flex-col gap-6" id="agentic-pipeline">
-          <div className="p-6 rounded-2xl bg-surface-card border border-slate-200 backdrop-blur-md flex flex-col gap-6 shadow-xl">
+          <div className="p-6 rounded-2xl bg-surface-card border border-slate-700 backdrop-blur-md flex flex-col gap-6 shadow-xl">
             <div className="flex items-center gap-2 text-xs font-bold text-text-secondary font-mono tracking-wider uppercase">
               <GitBranch size={14} className="text-primary-blue" />
               Agentic Pipeline Loop
@@ -273,12 +273,12 @@ export default function AIExpertise() {
                     onMouseLeave={() => setActiveWorkflowStep(null)}
                     className={`relative p-3.5 rounded-xl border transition-all duration-300 font-sans cursor-pointer ${
                       isActive
-                        ? `${step.color} border-slate-300 scale-[1.02] shadow-md`
-                        : 'bg-bg-primary border-slate-200'
+                        ? `${step.color} border-slate-600 scale-[1.02] shadow-md`
+                        : 'bg-bg-primary border-slate-700'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded bg-white flex items-center justify-center font-mono font-bold text-[10px] text-slate-600 border border-slate-200">
+                      <div className="w-6 h-6 rounded bg-surface-card flex items-center justify-center font-mono font-bold text-[10px] text-slate-300 border border-slate-700">
                         {step.id}
                       </div>
 
@@ -293,7 +293,7 @@ export default function AIExpertise() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="text-[11px] text-slate-600 mt-2.5 leading-relaxed pl-9 border-l border-slate-300"
+                          className="text-[11px] text-slate-300 mt-2.5 leading-relaxed pl-9 border-l border-slate-600"
                         >
                           {step.desc}
                         </motion.p>
