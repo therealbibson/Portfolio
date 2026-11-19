@@ -11,7 +11,7 @@ export default function Services({ onOpenContact }: ServicesProps) {
   return (
     <section
       id="services"
-      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-700"
+      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-stone-200"
     >
       <div className="flex flex-col items-start text-left gap-4 mb-12">
         <span className="text-xs font-mono font-medium tracking-wider text-primary-blue uppercase">
@@ -20,7 +20,7 @@ export default function Services({ onOpenContact }: ServicesProps) {
         <h2 className="font-display font-bold text-3xl sm:text-4xl text-text-white tracking-tight">
           Services & Capabilities
         </h2>
-        <p className="text-sm sm:text-base text-slate-300 max-w-2xl">
+        <p className="text-sm sm:text-base text-stone-600 max-w-2xl">
           End-to-end development services to help you build reliable, performant, and scalable applications.
         </p>
       </div>
@@ -34,24 +34,24 @@ export default function Services({ onOpenContact }: ServicesProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="p-6 sm:p-7 rounded-xl bg-surface-card border border-slate-700 hover:border-slate-600 transition-all flex flex-col"
+              className="p-6 sm:p-7 rounded-xl bg-surface-card border border-stone-200 hover:border-stone-300 transition-all flex flex-col"
             >
               <div>
-                <div className="w-10 h-10 rounded-lg bg-bg-primary flex items-center justify-center border border-slate-700 text-primary-blue mb-4">
+                <div className="w-10 h-10 rounded-lg bg-bg-primary flex items-center justify-center border border-stone-200 text-primary-blue mb-4">
                   <DynamicIcon name={service.icon} size={20} />
                 </div>
 
                 <h3 className="font-display font-semibold text-lg text-text-white">
                   {service.title}
                 </h3>
-                <p className="text-sm text-slate-300 mt-2 leading-relaxed">
+                <p className="text-sm text-stone-600 mt-2 leading-relaxed">
                   {service.description}
                 </p>
 
-                <ul className="mt-5 space-y-2 border-t border-slate-700 pt-4">
+                <ul className="mt-5 space-y-2 border-t border-stone-200 pt-4">
                   {service.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2 text-xs text-slate-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#4f739e] mt-1.5 flex-shrink-0" />
+                    <li key={bIdx} className="flex items-start gap-2 text-xs text-stone-600">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0f3d3e] mt-1.5 flex-shrink-0" />
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -60,7 +60,7 @@ export default function Services({ onOpenContact }: ServicesProps) {
 
               <div
                 onClick={onOpenContact}
-                className="mt-6 pt-4 border-t border-slate-700 flex items-center gap-1.5 text-xs font-semibold text-primary-blue hover:text-primary-blue cursor-pointer transition-colors"
+                className="mt-6 pt-4 border-t border-stone-200 flex items-center gap-1.5 text-xs font-semibold text-primary-blue hover:text-primary-blue cursor-pointer transition-colors"
               >
                 <span>Discuss a project</span>
                 <ArrowRight size={13} />

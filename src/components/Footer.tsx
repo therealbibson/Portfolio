@@ -19,7 +19,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-bg-primary border-t border-slate-700 py-10 px-4 sm:px-6">
+    <footer className="relative bg-bg-primary border-t border-stone-200 py-10 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto flex flex-col gap-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           {/* Brand Info */}
@@ -33,13 +33,13 @@ export default function Footer() {
                 {PERSONAL_INFO.name}<span className="text-primary-blue">.</span>
               </span>
             </a>
-            <span className="text-xs text-slate-300 font-medium">
+            <span className="text-xs text-stone-600 font-medium">
               {PERSONAL_INFO.title}
             </span>
           </div>
 
           {/* Quick links */}
-          <div className="flex flex-wrap gap-5 text-xs text-slate-300">
+          <div className="flex flex-wrap gap-5 text-xs text-stone-600">
             <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className="hover:text-text-white transition-colors">About</a>
             <a href="#skills" onClick={(e) => handleNavClick(e, '#skills')} className="hover:text-text-white transition-colors">Skills</a>
             <a href="#services" onClick={(e) => handleNavClick(e, '#services')} className="hover:text-text-white transition-colors">Services</a>
@@ -54,7 +54,7 @@ export default function Footer() {
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-300 hover:text-text-white transition-colors"
+              className="text-stone-600 hover:text-text-white transition-colors"
               title="GitHub"
             >
               <Github size={16} />
@@ -63,7 +63,7 @@ export default function Footer() {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-300 hover:text-text-white transition-colors"
+              className="text-stone-600 hover:text-text-white transition-colors"
               title="LinkedIn"
             >
               <Linkedin size={16} />
@@ -72,14 +72,14 @@ export default function Footer() {
               href={PERSONAL_INFO.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-300 hover:text-text-white transition-colors"
+              className="text-stone-600 hover:text-text-white transition-colors"
               title="X"
             >
               <FaXTwitter size={15} />
             </a>
             <button
               onClick={handleScrollToTop}
-              className="p-2 rounded-lg bg-surface-card border border-slate-700 text-slate-300 hover:text-text-white transition-colors cursor-pointer ml-2"
+              className="p-2 rounded-lg bg-surface-card border border-stone-200 text-stone-600 hover:text-text-white transition-colors cursor-pointer ml-2"
               title="Back to Top"
             >
               <ArrowUp size={14} />
@@ -87,7 +87,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
+        <div className="border-t border-stone-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-600">
           <span>&copy; {currentYear} {PERSONAL_INFO.name}. All rights reserved.</span>
           <span>Built with React, TypeScript & Tailwind CSS</span>
         </div>

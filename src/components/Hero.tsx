@@ -39,22 +39,24 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
     }
   };
 
-  // Static professional portrait — thin slate border, subtle shadow, no glow or floating
+  // Professional portrait — 3:4 frame matching the photo (1086x1448), face
+  // anchored at the top so it is never cropped. Static, thin stone border,
+  // subtle shadow, no glow or floating.
   const renderAvatar = (isMobile = false) => (
     <div className="relative">
       <div
         className={`relative ${
           isMobile
-            ? 'w-44 h-44 sm:w-56 sm:h-56'
-            : 'w-[300px] h-[300px] xl:w-[340px] xl:h-[340px]'
-        } rounded-2xl overflow-hidden border border-slate-700 bg-surface-card p-1 shadow-sm`}
+            ? 'w-56 sm:w-64 aspect-[3/4]'
+            : 'w-[300px] xl:w-[340px] aspect-[3/4]'
+        } rounded-2xl overflow-hidden border border-stone-200 bg-surface-card p-1 shadow-sm`}
       >
         <div className="w-full h-full bg-surface-card rounded-xl overflow-hidden relative">
           <img
             src={avatarImg}
             alt={PERSONAL_INFO.name}
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
         </div>
       </div>
@@ -77,9 +79,9 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
           {/* Status Badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-slate-700 text-[11px] sm:text-xs font-mono text-text-secondary"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-stone-200 text-[11px] sm:text-xs font-mono text-text-secondary"
           >
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
             <span>Available for new projects & opportunities</span>
           </motion.div>
 
@@ -90,7 +92,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
           >
             Hi, I'm <span className="text-primary-blue">{PERSONAL_INFO.name}</span>.
             <br />
-            <span className="text-2xl sm:text-4xl lg:text-5xl text-slate-300 font-semibold">
+            <span className="text-2xl sm:text-4xl lg:text-5xl text-stone-600 font-semibold">
               Full-Stack Developer & Software Engineer
             </span>
           </motion.h1>
@@ -103,7 +105,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
             {PERSONAL_INFO.roles.map((role) => (
               <span
                 key={role}
-                className="px-2.5 py-1 rounded-md bg-surface-card border border-slate-700 text-slate-300"
+                className="px-2.5 py-1 rounded-md bg-surface-card border border-stone-200 text-stone-600"
               >
                 {role}
               </span>
@@ -113,7 +115,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
           {/* Mobile-Only Avatar (In-between Roles and Bio) */}
           <motion.div
             variants={itemVariants}
-            className="lg:hidden w-full flex justify-center py-2 sm:py-3"
+            className="lg:hidden w-full flex justify-center py-4 sm:py-5"
           >
             {renderAvatar(true)}
           </motion.div>
@@ -134,7 +136,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
             <button
               id="hero-view-projects"
               onClick={(e) => handleNavClick(e, '#projects')}
-              className="px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4f739e] hover:bg-[#42607f] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-black/40"
+              className="px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#0f3d3e] hover:bg-[#0a2e2f] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-stone-900/10"
             >
               View Projects
               <ArrowRight size={16} />
@@ -144,7 +146,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
               <button
                 id="hero-download-resume"
                 onClick={onOpenResume}
-                className="px-5 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-text-white bg-surface-card hover:bg-white/5 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                className="px-5 py-3 rounded-lg text-sm font-semibold text-stone-600 hover:text-text-white bg-surface-card hover:bg-stone-100 border border-stone-200 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download size={16} />
                 Resume
@@ -153,7 +155,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
               <button
                 id="hero-contact-me"
                 onClick={onOpenContact}
-                className="px-5 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-text-white bg-surface-card hover:bg-white/5 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                className="px-5 py-3 rounded-lg text-sm font-semibold text-stone-600 hover:text-text-white bg-surface-card hover:bg-stone-100 border border-stone-200 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Mail size={16} />
                 Contact
@@ -166,12 +168,12 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
             variants={itemVariants}
             className="flex items-center gap-4 pt-2 text-text-secondary text-sm"
           >
-            <span className="text-xs font-mono text-slate-300">Find me on:</span>
+            <span className="text-xs font-mono text-stone-600">Find me on:</span>
             <a
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded hover:bg-white/5 hover:text-primary-blue transition-colors"
+              className="p-1.5 rounded hover:bg-stone-100 hover:text-primary-blue transition-colors"
               title="GitHub"
             >
               <Github size={18} />
@@ -180,7 +182,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded hover:bg-white/5 hover:text-primary-blue transition-colors"
+              className="p-1.5 rounded hover:bg-stone-100 hover:text-primary-blue transition-colors"
               title="LinkedIn"
             >
               <Linkedin size={18} />
@@ -189,7 +191,7 @@ export default function Hero({ onOpenContact, onOpenResume }: HeroProps) {
               href={PERSONAL_INFO.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded hover:bg-white/5 hover:text-primary-blue transition-colors"
+              className="p-1.5 rounded hover:bg-stone-100 hover:text-primary-blue transition-colors"
               title="X (Twitter)"
             >
               <FaXTwitter size={17} />
