@@ -80,13 +80,44 @@ export default async function handler(req: any, res: any) {
     ``,
     message,
   ].join('\n');
+  // Branded HTML email — table layout with inline styles, so it renders
+  // consistently across email clients. Matches the portfolio: deep teal
+  // (#0f3d3e) header with the UA. brand, warm off-white background,
+  // white card, and a reply button. All visitor content is escaped.
+  const replyHref = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(`Re: ${emailSubject}`)}`;
   const htmlBody = [
-    `<p>New message from your portfolio contact form.</p>`,
-    `<p><strong>Name:</strong> ${escapeHtml(name)}<br />`,
-    `<strong>Email:</strong> ${escapeHtml(email)}<br />`,
-    `<strong>Subject:</strong> ${escapeHtml(emailSubject)}</p>`,
-    `<p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>`,
-  ].join('\n');
+    `<!DOCTYPE html><html><body style="margin:0;padding:0;background-color:#f7f5f0;font-family:Arial,Helvetica,sans-serif;">`,
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f7f5f0;padding:24px 12px;">`,
+    `<tr><td align="center">`,
+    `<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border:1px solid #e7e0d3;border-radius:12px;overflow:hidden;">`,
+    // Header — deep teal with UA. brand
+    `<tr><td style="background-color:#0f3d3e;padding:24px 28px;">`,
+    `<p style="margin:0;color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:-0.5px;">UA<span style="color:#7fb5b3;">.</span></p>`,
+    `<p style="margin:6px 0 0;color:#c8ddd9;font-size:13px;">New message from your portfolio contact form</p>`,
+    `</td></tr>`,
+    // Body — sender details
+    `<tr><td style="padding:28px;">`,
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0">`,
+    `<tr><td style="padding:6px 0;font-size:14px;color:#556662;">Name</td><td style="padding:6px 0;font-size:14px;color:#1e2a28;font-weight:bold;">${escapeHtml(name)}</td></tr>`,
+    `<tr><td style="padding:6px 0;font-size:14px;color:#556662;">Email</td><td style="padding:6px 0;font-size:14px;color:#1e2a28;font-weight:bold;"><a href="mailto:${escapeHtml(email)}" style="color:#0f3d3e;">${escapeHtml(email)}</a></td></tr>`,
+    `<tr><td style="padding:6px 0;font-size:14px;color:#556662;">Subject</td><td style="padding:6px 0;font-size:14px;color:#1e2a28;font-weight:bold;">${escapeHtml(emailSubject)}</td></tr>`,
+    `</table>`,
+    // Message
+    `<p style="margin:24px 0 8px;font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#0f3d3e;">Message</p>`,
+    `<div style="background-color:#f7f5f0;border:1px solid #e7e0d3;border-radius:8px;padding:16px 18px;font-size:14px;line-height:1.6;color:#1e2a28;">${escapeHtml(message).replace(/\n/g, '<br />')}</div>`,
+    // Reply button
+    `<p style="margin:24px 0 0;text-align:center;"><a href="${replyHref}" style="display:inline-block;background-color:#0f3d3e;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 28px;border-radius:8px;">Reply to ${escapeHtml(name)}</a></p>`,
+    `<p style="margin:16px 0 0;font-size:12px;color:#556662;text-align:center;">Replying goes straight to the sender — no need to copy their address.</p>`,
+    `</td></tr>`,
+    // Footer
+    `<tr><td style="padding:16px 28px;border-top:1px solid #e7e0d3;">`,
+    `<p style="margin:0;font-size:12px;color:#556662;">Sent from <a href="https://usmanabeeb.vercel.app/" style="color:#0f3d3e;">usmanabeeb.vercel.app</a> &middot; Usman Abeeb, Full-Stack Developer</p>`,
+    `</td></tr>`,
+    `</table>`,
+    `</td></tr>`,
+    `</table>`,
+    `</body></html>`,
+  ].join('');
 
   try {
     const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
