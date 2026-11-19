@@ -29,7 +29,7 @@ export default function Footer() {
               onClick={(e) => handleNavClick(e, '#overview')}
               className="group cursor-pointer"
             >
-              <span className="font-display font-bold text-base text-text-white group-hover:text-primary-blue transition-colors">
+              <span className="border-b-[3px] border-primary-blue/80 pb-0.5 font-display text-xl font-extrabold tracking-tight text-text-white transition-colors group-hover:text-primary-blue">
                 UA<span className="text-primary-blue">.</span>
               </span>
             </a>
