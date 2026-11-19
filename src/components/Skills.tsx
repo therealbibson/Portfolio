@@ -16,7 +16,7 @@ export default function Skills() {
           Tools, Languages & Frameworks
         </h2>
         <p className="text-sm sm:text-base text-slate-400 max-w-2xl">
-          Technologies and tools I use to develop robust, production-grade applications.
+          Technologies and tools I use to develop robust, production-grade applications — 3+ years working across this stack.
         </p>
       </div>
 

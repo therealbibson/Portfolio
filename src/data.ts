@@ -56,7 +56,8 @@ export const SERVICES: Service[] = [
       "Cross-platform iOS and Android apps with React Native & Expo",
       "Offline-first local storage using SQLite",
       "Hardware and sensor integrations (Camera, Biometrics, GPS)",
-      "Clean UI component design and responsive mobile layouts"
+      "Clean UI component design and responsive mobile layouts",
+      "App Store and Play Store deployment and updates"
     ]
   },
   {
@@ -68,7 +69,8 @@ export const SERVICES: Service[] = [
       "Integration with Gemini, Claude, and OpenAI APIs",
       "Structured prompt engineering and schema validation",
       "RAG workflows and vector database querying",
-      "Practical agentic workflows and automated assistance"
+      "Practical agentic workflows and automated assistance",
+      "Monitoring, evaluation and continuous improvement of AI features"
     ]
   }
 ];
@@ -156,7 +158,7 @@ export const PROJECTS: Project[] = [
   {
     id: "SafeBite",
     title: "SafeBite - Food Delivery App",
-    description: "The fastest delivery in town, They focus on bringing your favorite flavors right to your doorstep.",
+    description: "The fastest delivery in town — bringing your favorite flavors right to your doorstep.",
     category: "Webapp",
     techStack: ["React", "Node.js", "Tailwind CSS", "Express.js", "MongoDB", "JavaScript"],
     github: "https://github.com/therealbibson/SafeBites",
@@ -186,7 +188,7 @@ export const PROJECTS: Project[] = [
   {
     id: "Reviewbot AI",
     title: "Reviewbot AI",
-    description: "Evidence-based review system for Celo and AskBots - On-chain auditor for AI agents on Celo",
+    description: "An evidence-based review system for Celo and AskBots — an on-chain auditor for AI agents on Celo.",
     category: "AI",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Celo Builders"],
     github: "https://github.com/therealbibson/ReviewBot.cole",
@@ -198,52 +200,37 @@ export const PROJECTS: Project[] = [
       "Created a polished frontend experience with actionable reporting, markdown-based result rendering, and a strong emphasis on transparent AI evaluation."
     ]
   },
-  {
-    id: "athena-analytics",
-    title: "Athena Prompt Analytics Portal",
-    description: "A centralized dashboard for teams to test, benchmark, and evaluate system prompts across various AI models.",
-    category: "AI",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Express.js"],
-    github: "https://github.com/therealbibson",
-    projectUrl: "https://github.com/therealbibson",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-    details: [
-      "Created a centralized prompt analytics dashboard that helps teams test, benchmark, and compare AI responses across multiple model configurations.",
-      "Built evaluation views for latency, cost, and output quality so teams can monitor prompt performance with measurable operational insight.",
-      "Delivered a modular, data-driven experience using a modern frontend and API-backed workflow for scalable prompt experimentation and reporting."
-    ]
-  }
 ];
 
-// export const TIMELINE: TimelineItem[] = [
-//   {
-//     id: "lead-dev",
-//     period: "2024 - Present",
-//     title: "Full-Stack Software Engineer",
-//     organization: "Tech Solutions & Engineering",
-//     description: "Architecting full-stack web applications, designing scalable REST APIs, and integrating modern AI capabilities into client-facing products.",
-//     type: "experience",
-//     tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Docker", "LLM APIs"]
-//   },
-//   {
-//     id: "freelance-fullstack",
-//     period: "2022 - 2024",
-//     title: "Full-Stack & Mobile Developer",
-//     organization: "Freelance & Startup Projects",
-//     description: "Collaborated with clients to build responsive web applications, mobile apps with offline support, and backend API integrations.",
-//     type: "freelance",
-//     tech: ["React Native", "Expo", "Express.js", "Tailwind CSS", "MongoDB", "SQLite"]
-//   },
-//   {
-//     id: "senior-front",
-//     period: "2021 - 2022",
-//     title: "Frontend Developer",
-//     organization: "Digital Interface Studio",
-//     description: "Developed modern, accessible UI components, optimized web vitals, and implemented responsive layouts with modern JavaScript and React.",
-//     type: "experience",
-//     tech: ["React", "JavaScript", "CSS3 / Sass", "Tailwind CSS", "Git"]
-//   }
-// ];
+export const TIMELINE: TimelineItem[] = [
+  {
+    id: "lead-dev",
+    period: "2024 - Present",
+    title: "Full-Stack Software Engineer",
+    organization: "Tech Solutions & Engineering",
+    description: "Architecting full-stack web applications, designing scalable REST APIs, and integrating modern AI capabilities into client-facing products.",
+    type: "experience",
+    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Docker", "LLM APIs"]
+  },
+  {
+    id: "freelance-fullstack",
+    period: "2022 - 2024",
+    title: "Full-Stack & Mobile Developer",
+    organization: "Freelance & Startup Projects",
+    description: "Collaborated with clients to build responsive web applications, mobile apps with offline support, and backend API integrations.",
+    type: "freelance",
+    tech: ["React Native", "Expo", "Express.js", "Tailwind CSS", "MongoDB", "SQLite"]
+  },
+  {
+    id: "senior-front",
+    period: "2021 - 2022",
+    title: "Frontend Developer",
+    organization: "Digital Interface Studio",
+    description: "Developed modern, accessible UI components, optimized web vitals, and implemented responsive layouts with modern JavaScript and React.",
+    type: "experience",
+    tech: ["React", "JavaScript", "CSS3 / Sass", "Tailwind CSS", "Git"]
+  }
+];
 
 export const PROMPT_PLAYGROUND_TEMPLATES: any[] = [];
 export const TESTIMONIALS: any[] = [];

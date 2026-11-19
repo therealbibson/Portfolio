@@ -1,5 +1,5 @@
 import { X, Printer, Mail, MapPin, Github, Linkedin } from 'lucide-react';
-import { PERSONAL_INFO, TIMELINE, SKILL_CATEGORIES, PROJECTS } from '../data';
+import { PERSONAL_INFO, SKILL_CATEGORIES, PROJECTS } from '../data';
 
 interface ResumeModalProps {
   isOpen: boolean;

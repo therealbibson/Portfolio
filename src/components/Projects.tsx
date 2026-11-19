@@ -67,14 +67,14 @@ export default function Projects() {
             >
               {/* Image Preview */}
               <div
-                className="relative aspect-[16/10] overflow-hidden bg-bg-primary cursor-pointer border-b border-slate-800/80"
+                className="relative aspect-[16/7] overflow-hidden bg-bg-primary cursor-pointer border-b border-slate-800/80"
                 onClick={() => setSelectedProject(project)}
               >
                 <img
                   src={project.image}
                   alt={project.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm border border-slate-700/60 px-2.5 py-0.5 rounded text-[11px] font-mono text-primary-blue">
                   {project.category}

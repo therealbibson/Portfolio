@@ -34,7 +34,7 @@ export default function Services({ onOpenContact }: ServicesProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="p-6 sm:p-7 rounded-xl bg-surface-card border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between"
+              className="p-6 sm:p-7 rounded-xl bg-surface-card border border-slate-800 hover:border-slate-700 transition-all flex flex-col"
             >
               <div>
                 <div className="w-10 h-10 rounded-lg bg-bg-primary flex items-center justify-center border border-slate-800 text-primary-blue mb-4">

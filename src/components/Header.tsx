@@ -73,14 +73,14 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
           ))}
         </nav>
 
-        {/* Right side — Read the CV + Mobile Menu */}
+        {/* Right side — View Resume + Mobile Menu */}
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenResume}
             className="hidden md:flex px-3.5 py-1.5 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white transition-colors cursor-pointer items-center gap-1.5 shrink-0"
           >
             <FileText size={13} />
-            Read the CV
+            View Resume
           </button>
 
           {/* Mobile Menu Button */}
@@ -115,7 +115,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
             className="mt-3 w-full py-2.5 rounded-lg bg-primary-blue hover:bg-blue-600 text-xs font-semibold text-white text-center cursor-pointer flex items-center justify-center gap-2"
           >
             <FileText size={14} />
-            Read the CV
+            View Resume
           </button>
         </div>
       )}
