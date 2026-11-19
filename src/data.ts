@@ -6,7 +6,7 @@ import SpendwiseApp from './assets/images/spendwiseapp.jpg';
 import ReviewbotImg from './assets/images/reviewbotimg.png';
 
 export const PERSONAL_INFO = {
-  name: "UA",
+  name: "Usman Abeeb",
   title: "Full-Stack Developer & Software Engineer",
   roles: ["Frontend Developer", "Backend Engineer", "Mobile Developer", "AI Integration"],
   bio: "I build responsive web applications, reliable backend systems, and cross-platform mobile apps. I focus on clean code, intuitive user experience, and practical AI implementations.",
