@@ -34,7 +34,7 @@ export default function Footer() {
               </span>
             </a>
             <span className="text-xs text-slate-300 font-medium">
-              Full-Stack Developer & Software Engineer
+              {PERSONAL_INFO.title}
             </span>
           </div>
 
@@ -44,7 +44,7 @@ export default function Footer() {
             <a href="#skills" onClick={(e) => handleNavClick(e, '#skills')} className="hover:text-text-white transition-colors">Skills</a>
             <a href="#services" onClick={(e) => handleNavClick(e, '#services')} className="hover:text-text-white transition-colors">Services</a>
             <a href="#projects" onClick={(e) => handleNavClick(e, '#projects')} className="hover:text-text-white transition-colors">Projects</a>
-            <a href="#timeline" onClick={(e) => handleNavClick(e, '#timeline')} className="hover:text-text-white transition-colors">Experience</a>
+            {/* Experience hidden for now — <a href="#timeline" onClick={(e) => handleNavClick(e, '#timeline')} className="hover:text-text-white transition-colors">Experience</a> */}
             <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="hover:text-text-white transition-colors">Contact</a>
           </div>
 

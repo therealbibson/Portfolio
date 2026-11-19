@@ -38,6 +38,7 @@ export interface TimelineItem {
   title: string;
   organization: string;
   description: string;
+  bullets?: string[];
   type: 'experience' | 'freelance' | 'education' | 'certification';
   tech?: string[];
 }

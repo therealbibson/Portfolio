@@ -5,7 +5,8 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Services from './components/Services';
 import Projects from './components/Projects';
-import Timeline from './components/Timeline';
+// Experience hidden for now — re-enable by uncommenting the Timeline import/render and the Experience links in Header.tsx and Footer.tsx
+// import Timeline from './components/Timeline';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
@@ -37,7 +38,7 @@ export default function App() {
         <Skills />
         <Services onOpenContact={handleOpenContact} />
         <Projects />
-        <Timeline />
+        {/* Experience hidden for now — <Timeline /> */}
         <Contact />
       </main>
       <Footer />

@@ -25,7 +25,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
     { label: 'Skills', href: '#skills' },
     { label: 'Services', href: '#services' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Experience', href: '#timeline' },
+    // Experience hidden for now — { label: 'Experience', href: '#timeline' },
     { label: 'Contact', href: '#contact' },
   ];
 

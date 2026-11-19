@@ -56,7 +56,7 @@ export default function About() {
           <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-700 text-xs sm:text-sm">
             <div>
               <span className="font-mono text-slate-300 uppercase block mb-1">Location</span>
-              <span className="font-medium text-text-white">Lagos, Nigeria (Remote Worldwide)</span>
+              <span className="font-medium text-text-white">{PERSONAL_INFO.location}</span>
             </div>
             <div>
               <span className="font-mono text-slate-300 uppercase block mb-1">Email</span>

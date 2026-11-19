@@ -1,5 +1,5 @@
 import { X, Printer, Mail, MapPin, Github, Linkedin } from 'lucide-react';
-import { PERSONAL_INFO, SKILL_CATEGORIES, PROJECTS } from '../data';
+import { PERSONAL_INFO, SKILL_CATEGORIES, PROJECTS, TIMELINE } from '../data';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -81,14 +81,14 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 </a>
                 <span className="flex items-center gap-1">
                   <MapPin size={11} className="text-primary-blue" />
-                  <span>Lagos, Nigeria (Remote)</span>
+                  <span>{PERSONAL_INFO.location}</span>
                 </span>
               </div>
             </div>
 
             {/* Brief Professional Summary */}
             <p className="mt-1.5 text-slate-300 print:text-neutral-700 text-[11px] sm:text-xs leading-relaxed">
-              Full-Stack Developer with 3+ years of experience building responsive web frontends, scalable REST APIs, and cross-platform mobile apps. Proficient in TypeScript, React, Next.js, Node.js, and React Native with practical experience integrating LLM APIs into production applications.
+              {PERSONAL_INFO.summary}
             </p>
           </div>
 
@@ -98,18 +98,12 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               Technical Skills
             </h2>
             <div className="space-y-0.5 text-[10.5px] sm:text-[11.5px]">
-              <div>
-                <span className="font-semibold text-text-white resume-role-title">Languages & Frontend: </span>
-                <span className="text-slate-300 print:text-neutral-700">TypeScript, JavaScript, React, Next.js, Tailwind CSS, HTML5/CSS3, Zustand, Redux.</span>
-              </div>
-              <div>
-                <span className="font-semibold text-text-white resume-role-title">Backend & Cloud: </span>
-                <span className="text-slate-300 print:text-neutral-700">Node.js, Express.js, PostgreSQL, MongoDB, RESTful APIs, Redis, Docker.</span>
-              </div>
-              <div>
-                <span className="font-semibold text-text-white resume-role-title">Mobile & Tools: </span>
-                <span className="text-slate-300 print:text-neutral-700">React Native, Expo, SQLite, Git, Linux, LLM APIs (Gemini, Claude, OpenAI).</span>
-              </div>
+              {SKILL_CATEGORIES.map((category) => (
+                <div key={category.title}>
+                  <span className="font-semibold text-text-white resume-role-title">{category.title}: </span>
+                  <span className="text-slate-300 print:text-neutral-700">{category.items.map((item) => item.name).join(', ')}.</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -119,46 +113,21 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               Work Experience
             </h2>
 
-            {/* Role 1 */}
-            <div className="space-y-0.5">
-              <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
-                <span className="font-semibold text-text-white resume-role-title">
-                  Full-Stack Software Engineer <span className="font-normal text-slate-300 print:text-neutral-600">— Tech Solutions & Engineering</span>
-                </span>
-                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">2024 – Present</span>
+            {TIMELINE.map((role) => (
+              <div key={role.id} className="space-y-0.5">
+                <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
+                  <span className="font-semibold text-text-white resume-role-title">
+                    {role.title} <span className="font-normal text-slate-300 print:text-neutral-600">— {role.organization}</span>
+                  </span>
+                  <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">{role.period}</span>
+                </div>
+                <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
+                  {(role.bullets ?? [role.description]).map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
               </div>
-              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
-                <li>Architected full-stack web applications using React, TypeScript, and Node.js with PostgreSQL persistence.</li>
-                <li>Designed secure RESTful APIs with JWT authentication, Redis caching, and integrated Gemini LLM workflows for automated data parsing.</li>
-              </ul>
-            </div>
-
-            {/* Role 2 */}
-            <div className="space-y-0.5">
-              <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
-                <span className="font-semibold text-text-white resume-role-title">
-                  Full-Stack & Mobile Developer <span className="font-normal text-slate-300 print:text-neutral-600">— Freelance & Startups</span>
-                </span>
-                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">2022 – 2024</span>
-              </div>
-              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
-                <li>Built cross-platform iOS and Android mobile apps using React Native and Expo with offline-first SQLite synchronization.</li>
-                <li>Engineered responsive client dashboards and integrated third-party payment and messaging APIs.</li>
-              </ul>
-            </div>
-
-            {/* Role 3 */}
-            <div className="space-y-0.5">
-              <div className="resume-job-row flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5">
-                <span className="font-semibold text-text-white resume-role-title">
-                  Frontend Developer <span className="font-normal text-slate-300 print:text-neutral-600">— Digital Interface Studio</span>
-                </span>
-                <span className="resume-date font-mono text-[9.5px] sm:text-[10px] text-slate-300 print:text-neutral-600 shrink-0">2021 – 2022</span>
-              </div>
-              <ul className="list-disc list-inside text-slate-300 print:text-neutral-700 text-[10.5px] sm:text-[11px] space-y-0.5">
-                <li>Developed modular, accessible UI components and optimized Core Web Vitals to deliver sub-second page loads.</li>
-              </ul>
-            </div>
+            ))}
           </div>
 
           {/* All Projects Section */}

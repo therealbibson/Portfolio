@@ -10,8 +10,9 @@ export const PERSONAL_INFO = {
   title: "Full-Stack Developer & Software Engineer",
   roles: ["Frontend Developer", "Backend Engineer", "Mobile Developer", "AI Integration"],
   bio: "I build responsive web applications, reliable backend systems, and cross-platform mobile apps. I focus on clean code, intuitive user experience, and practical AI implementations.",
+  summary: "Full-Stack Developer with 3+ years of experience building responsive web frontends, scalable REST APIs, and cross-platform mobile apps. Proficient in TypeScript, React, Next.js, Node.js, and React Native with practical experience integrating LLM APIs into production applications.",
   email: "uabeeb3@gmail.com",
-  location: "Available for Remote & Contract roles",
+  location: "Lagos, Nigeria (Remote Worldwide)",
   github: "https://github.com/therealbibson",
   linkedin: "https://linkedin.com/in/usman-abeeb-9a998a279",
   twitter: "https://x.com/theRealBibson",
@@ -209,6 +210,10 @@ export const TIMELINE: TimelineItem[] = [
     title: "Full-Stack Software Engineer",
     organization: "Tech Solutions & Engineering",
     description: "Architecting full-stack web applications, designing scalable REST APIs, and integrating modern AI capabilities into client-facing products.",
+    bullets: [
+      "Architected full-stack web applications using React, TypeScript, and Node.js with PostgreSQL persistence.",
+      "Designed secure RESTful APIs with JWT authentication, Redis caching, and integrated Gemini LLM workflows for automated data parsing."
+    ],
     type: "experience",
     tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Docker", "LLM APIs"]
   },
@@ -218,6 +223,10 @@ export const TIMELINE: TimelineItem[] = [
     title: "Full-Stack & Mobile Developer",
     organization: "Freelance & Startup Projects",
     description: "Collaborated with clients to build responsive web applications, mobile apps with offline support, and backend API integrations.",
+    bullets: [
+      "Built cross-platform iOS and Android mobile apps using React Native and Expo with offline-first SQLite synchronization.",
+      "Engineered responsive client dashboards and integrated third-party payment and messaging APIs."
+    ],
     type: "freelance",
     tech: ["React Native", "Expo", "Express.js", "Tailwind CSS", "MongoDB", "SQLite"]
   },
@@ -227,6 +236,9 @@ export const TIMELINE: TimelineItem[] = [
     title: "Frontend Developer",
     organization: "Digital Interface Studio",
     description: "Developed modern, accessible UI components, optimized web vitals, and implemented responsive layouts with modern JavaScript and React.",
+    bullets: [
+      "Developed modular, accessible UI components and optimized Core Web Vitals to deliver sub-second page loads."
+    ],
     type: "experience",
     tech: ["React", "JavaScript", "CSS3 / Sass", "Tailwind CSS", "Git"]
   }
