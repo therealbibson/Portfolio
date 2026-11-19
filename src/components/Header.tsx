@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText } from 'lucide-react';
-import { PERSONAL_INFO } from '../data';
 
 interface HeaderProps {
   onOpenContact: () => void;
@@ -55,7 +54,7 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
           className="group cursor-pointer py-1 shrink-0"
         >
           <span className="font-display font-bold text-base tracking-tight text-text-white group-hover:text-primary-blue transition-colors">
-            {PERSONAL_INFO.name}<span className="text-primary-blue">.</span>
+            UA<span className="text-primary-blue">.</span>
           </span>
         </a>
 

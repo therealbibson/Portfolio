@@ -30,7 +30,7 @@ export default function Footer() {
               className="group cursor-pointer"
             >
               <span className="font-display font-bold text-base text-text-white group-hover:text-primary-blue transition-colors">
-                {PERSONAL_INFO.name}<span className="text-primary-blue">.</span>
+                UA<span className="text-primary-blue">.</span>
               </span>
             </a>
             <span className="text-xs text-stone-600 font-medium">
