@@ -6,13 +6,13 @@
   --font-display: "Sora", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", SFMono-Regular, monospace;
 
-  /* Custom palette matching mood spec */
-  --color-bg-primary: #050816;
-  --color-surface-card: #0f172a;
-  --color-primary-blue: #3b82f6;
-  --color-accent-purple: #8b5cf6;
-  --color-text-white: #ffffff;
-  --color-text-secondary: #94a3b8;
+  /* Clean light professional palette — white, navy and slate */
+  --color-bg-primary: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-primary-blue: #1e3a5f;
+  --color-accent-purple: #1e3a5f;
+  --color-text-white: #0f172a;
+  --color-text-secondary: #475569;
 }
 
 /* Base custom styles to reinforce typography */

@@ -27,14 +27,14 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-24 max-w-7xl mx-auto px-6 overflow-hidden border-t border-slate-900/60"
+      className="relative py-24 max-w-7xl mx-auto px-6 overflow-hidden border-t border-slate-200"
     >
       {/* Background Decorative - REMOVED */}
 
       {/* Title */}
       <div className="flex flex-col items-center text-center gap-4 mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-slate-800">
-          <span className="text-[10px] sm:text-xs font-mono font-medium tracking-wider text-accent-purple">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-card border border-slate-200">
+          <span className="text-[10px] sm:text-xs font-mono font-medium tracking-wider text-primary-blue">
             07 // CLIENT ADVOCACY
           </span>
         </div>
@@ -57,17 +57,17 @@ export default function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
-              className="p-8 sm:p-10 rounded-2xl bg-surface-card border border-slate-800 shadow-xl backdrop-blur-md flex flex-col items-start text-left gap-6 relative"
+              className="p-8 sm:p-10 rounded-2xl bg-surface-card border border-slate-200 shadow-xl backdrop-blur-md flex flex-col items-start text-left gap-6 relative"
             >
               {/* Giant icon Quote overlay */}
-              <div className="absolute top-6 right-8 text-indigo-500/10 pointer-events-none">
+              <div className="absolute top-6 right-8 text-slate-200 pointer-events-none">
                 <Quote size={80} />
               </div>
 
               {/* Rating Star gauge */}
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, starIdx) => (
-                  <Star key={starIdx} size={14} className="fill-accent-purple text-accent-purple" />
+                  <Star key={starIdx} size={14} className="fill-primary-blue text-primary-blue" />
                 ))}
               </div>
 
@@ -77,9 +77,9 @@ export default function Testimonials() {
               </p>
 
               {/* Account details footer */}
-              <div className="flex items-center gap-4 pt-4 border-t border-slate-800 w-full z-10">
+              <div className="flex items-center gap-4 pt-4 border-t border-slate-200 w-full z-10">
                 {/* Avatar */}
-                <div className="w-11 h-11 rounded-full overflow-hidden border border-slate-800">
+                <div className="w-11 h-11 rounded-full overflow-hidden border border-slate-200">
                   <img
                     src={item.avatar}
                     alt={item.name}
@@ -112,7 +112,7 @@ export default function Testimonials() {
                 id={`carousel-indicator-${idx}`}
                 onClick={() => setActive(idx)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  active === idx ? 'bg-accent-purple w-6' : 'bg-surface-card border border-slate-800 hover:bg-bg-primary'
+                  active === idx ? 'bg-primary-blue w-6' : 'bg-surface-card border border-slate-200 hover:bg-bg-primary'
                 }`}
               />
             ))}
@@ -123,14 +123,14 @@ export default function Testimonials() {
             <button
               id="slider-btn-prev"
               onClick={handlePrev}
-              className="p-2.5 rounded-lg bg-surface-card border border-slate-800 text-text-secondary hover:text-text-white transition-all cursor-pointer"
+              className="p-2.5 rounded-lg bg-surface-card border border-slate-200 text-text-secondary hover:text-text-white transition-all cursor-pointer"
             >
               <ChevronLeft size={16} />
             </button>
             <button
               id="slider-btn-next"
               onClick={handleNext}
-              className="p-2.5 rounded-lg bg-surface-card border border-slate-800 text-text-secondary hover:text-text-white transition-all cursor-pointer"
+              className="p-2.5 rounded-lg bg-surface-card border border-slate-200 text-text-secondary hover:text-text-white transition-all cursor-pointer"
             >
               <ChevronRight size={16} />
             </button>

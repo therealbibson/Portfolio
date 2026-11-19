@@ -29,7 +29,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-900/80"
+      className="relative py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 border-t border-slate-200"
     >
       <div className="flex flex-col items-start text-left gap-4 mb-12">
         <span className="text-xs font-mono font-medium tracking-wider text-primary-blue uppercase">
@@ -42,7 +42,7 @@ export default function About() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start text-left">
         {/* Narrative Description */}
-        <div className="lg:col-span-7 space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+        <div className="lg:col-span-7 space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
           <p>
             I am a full-stack developer passionate about building clean, efficient, and user-centric software. I specialize in the TypeScript ecosystem—building web frontends with React & Next.js, robust backends with Node.js & Express, and mobile applications with React Native.
           </p>
@@ -53,13 +53,13 @@ export default function About() {
             I also actively integrate generative AI capabilities—leveraging LLM APIs like Gemini and OpenAI to automate complex workflows, extract structured data, and deliver intuitive assistant experiences.
           </p>
 
-          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-800 text-xs sm:text-sm">
+          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-200 text-xs sm:text-sm">
             <div>
-              <span className="font-mono text-slate-500 uppercase block mb-1">Location</span>
+              <span className="font-mono text-slate-600 uppercase block mb-1">Location</span>
               <span className="font-medium text-text-white">Lagos, Nigeria (Remote Worldwide)</span>
             </div>
             <div>
-              <span className="font-mono text-slate-500 uppercase block mb-1">Email</span>
+              <span className="font-mono text-slate-600 uppercase block mb-1">Email</span>
               <a href={`mailto:${PERSONAL_INFO.email}`} className="font-medium text-primary-blue hover:underline">
                 {PERSONAL_INFO.email}
               </a>
@@ -78,7 +78,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-5 rounded-xl bg-surface-card border border-slate-800 flex items-start gap-3.5"
+                className="p-5 rounded-xl bg-surface-card border border-slate-200 flex items-start gap-3.5"
               >
                 <div className="p-2 rounded-lg bg-primary-blue/10 text-primary-blue mt-0.5">
                   <Icon size={18} />
@@ -87,7 +87,7 @@ export default function About() {
                   <h3 className="font-display font-semibold text-sm text-text-white mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
