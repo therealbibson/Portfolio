@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Github, Linkedin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
-import emailjs from '@emailjs/browser';
 import { PERSONAL_INFO } from '../data';
 
 export default function Contact() {
@@ -27,42 +26,9 @@ export default function Contact() {
     setErrorMessage('');
 
     try {
-      const env = (import.meta as any).env || {};
-      const serviceId = env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = env.VITE_EMAILJS_PUBLIC_KEY;
-
-      const hasValidEmailJs =
-        serviceId &&
-        templateId &&
-        publicKey &&
-        serviceId !== 'your_service_id' &&
-        templateId !== 'your_template_id' &&
-        publicKey !== 'your_public_key';
-
-      // 1. If user configured EmailJS credentials, send via EmailJS
-      if (hasValidEmailJs) {
-        const result = await emailjs.send(
-          serviceId,
-          templateId,
-          {
-            from_name: formData.name,
-            reply_to: formData.email,
-            subject: formData.subject || 'Portfolio Message',
-            message: formData.message,
-          },
-          publicKey
-        );
-
-        if (result.status === 200) {
-          setStatus('success');
-          setFormData({ name: '', email: '', subject: '', message: '' });
-          return;
-        }
-      }
-
-      // 2. Direct serverless delivery straight to user's personal inbox (No setup required)
-      const response = await fetch(`https://formsubmit.co/ajax/${PERSONAL_INFO.email}`, {
+      // Delivered via Brevo through the /api/send-message serverless
+      // function, so the Brevo API key never reaches the browser.
+      const response = await fetch('/api/send-message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,17 +37,17 @@ export default function Contact() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          _subject: formData.subject || `New Portfolio Message from ${formData.name}`,
+          subject: formData.subject || `New Portfolio Message from ${formData.name}`,
           message: formData.message,
         }),
       });
 
-      const data = await response.json();
-      if (response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
+      const data = await response.json().catch(() => ({}));
+      if (response.ok && data.success) {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        throw new Error(data.message || 'Delivery service unavailable');
+        throw new Error(data.error || 'Delivery service unavailable');
       }
     } catch (error) {
       console.error('Contact submit error:', error);
