@@ -51,9 +51,12 @@ export default function Header({ onOpenContact, onOpenResume }: HeaderProps) {
         <a
           href="#overview"
           onClick={(e) => handleNavClick(e, '#overview')}
-          className="group cursor-pointer py-1 shrink-0"
+          className="group flex cursor-pointer items-center gap-2.5 py-1 shrink-0"
         >
-          <span className="font-display font-bold text-base tracking-tight text-text-white group-hover:text-primary-blue transition-colors">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0f3d3e] font-display text-sm font-bold text-white shadow-sm transition-transform duration-200 group-hover:scale-105">
+            UA
+          </span>
+          <span className="font-display text-lg font-extrabold tracking-tight text-text-white transition-colors group-hover:text-primary-blue">
             UA<span className="text-primary-blue">.</span>
           </span>
         </a>
