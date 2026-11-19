@@ -1,6 +1,6 @@
 // Vercel Serverless Function: POST /api/send-message
 //
-// Delivers contact-form messages via Brevo (Transactional API).
+// Delivers contact messages via Brevo (Transactional API).
 // The Brevo API key lives ONLY in server-side environment variables
 // (BREVO_API_KEY, set in the Vercel dashboard) — it is never exposed
 // to the browser, and the frontend never talks to Brevo directly.
@@ -72,7 +72,7 @@ export default async function handler(req: any, res: any) {
   const senderEmail = process.env.BREVO_SENDER_EMAIL || 'uabeeb3@gmail.com';
   const emailSubject = subject || `New Portfolio Message from ${name}`;
   const textBody = [
-    `New message from your portfolio contact form.`,
+    `You have a new message from your portfolio.`,
     ``,
     `Name: ${name}`,
     `Email: ${email}`,
@@ -93,7 +93,7 @@ export default async function handler(req: any, res: any) {
     // Header — deep teal with UA. brand
     `<tr><td style="background-color:#0f3d3e;padding:24px 28px;">`,
     `<p style="margin:0;color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:-0.5px;">UA<span style="color:#7fb5b3;">.</span></p>`,
-    `<p style="margin:6px 0 0;color:#c8ddd9;font-size:13px;">New message from your portfolio contact form</p>`,
+    `<p style="margin:6px 0 0;color:#c8ddd9;font-size:13px;">You have a new message</p>`,
     `</td></tr>`,
     // Body — sender details
     `<tr><td style="padding:28px;">`,
@@ -128,7 +128,7 @@ export default async function handler(req: any, res: any) {
         'api-key': apiKey,
       },
       body: JSON.stringify({
-        sender: { email: senderEmail, name: 'Portfolio Contact Form' },
+        sender: { email: senderEmail, name: 'Usman Abeeb' },
         to: [{ email: senderEmail, name: 'Usman Abeeb' }],
         replyTo: { email, name },
         subject: emailSubject,
